@@ -21,7 +21,13 @@ public class ImageSystem extends EntitySystem {
 
     @Override
     public void render(Entity[] entities, GameContainer gc, Graphics g) {
-
+        for(Entity e : entities){
+            g.drawImage(
+                    ((ImageComponent) e.getComponentByClass(ImageComponent.class)).image,
+                    (int) ((PositionComponent) e.getComponentByClass(PositionComponent.class)).x,
+                    (int) ((PositionComponent) e.getComponentByClass(PositionComponent.class)).y
+            );
+        }
     }
 
     @Override

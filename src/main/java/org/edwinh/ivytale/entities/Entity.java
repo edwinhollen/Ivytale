@@ -18,4 +18,12 @@ public class Entity {
         }
         return classes.toArray(new Class[classes.size()]);
     }
+    public Component getComponentByClass(Class needle){
+        for(Component c : components){
+            if(needle.isInstance(c)){
+                return c;
+            }
+        }
+        return null;
+    }
 }
