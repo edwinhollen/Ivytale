@@ -27,7 +27,8 @@ public class Game extends BasicGame {
         super("Ivytale");
         config = new Config();
         appgc = new AppGameContainer(this);
-        appgc.setDisplayMode(800, 600, false);
+        appgc.setDisplayMode(config.screenWidth, config.screenHeight, false);
+        appgc.setVSync(config.vsync);
         appgc.setForceExit(false);
         appgc.start();
     }

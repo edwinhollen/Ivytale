@@ -1,6 +1,7 @@
 # display
 WIDTH=800
 HEIGHT=600
+VSYNC=TRUE
 
 # controls
 WALK_LEFT=KEY_LEFT

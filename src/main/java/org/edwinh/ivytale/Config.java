@@ -13,8 +13,12 @@ import java.nio.file.StandardCopyOption;
 public class Config {
     public static final String CONFIG_FILE_LOCATION = System.getProperty("user.home")+"/.ivytale/config.txt";
 
-    public int screenWidth, screenHeight;
-    public int control_walkLeft, control_walkRight, control_attack;
+    public int screenWidth = 800;
+    public int screenHeight = 600;
+    public boolean vsync = true;
+    public int control_walkLeft = Input.KEY_LEFT;
+    public int control_walkRight = Input.KEY_RIGHT;
+    public int control_attack = Input.KEY_LCONTROL;
 
     public Config(){
         load();
@@ -57,6 +61,9 @@ public class Config {
                             break;
                         case "HEIGHT":
                             screenHeight = Integer.parseInt(val);
+                            break;
+                        case "VSYNC":
+                            vsync = Boolean.parseBoolean(val);
                             break;
                         case "WALK_LEFT":
                             control_walkLeft = getKeyCode(val);
