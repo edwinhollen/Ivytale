@@ -20,7 +20,6 @@ public class Game extends BasicGame {
     public Config config;
 
     private AppGameContainer appgc;
-    private ArrayList<EntitySystem> systems;
     private Scene currentScene;
 
     public Game() throws SlickException {

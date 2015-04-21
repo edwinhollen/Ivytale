@@ -13,18 +13,18 @@ import java.nio.file.StandardCopyOption;
 public class Config {
     public static final String CONFIG_FILE_LOCATION = System.getProperty("user.home")+"/.ivytale/config.txt";
 
-    public int screenWidth = 800;
-    public int screenHeight = 600;
-    public boolean vsync = true;
-    public int control_walkLeft = Input.KEY_LEFT;
-    public int control_walkRight = Input.KEY_RIGHT;
-    public int control_attack = Input.KEY_LCONTROL;
+    public static int screenWidth = 800;
+    public static int screenHeight = 600;
+    public static boolean vsync = true;
+    public static int control_walkLeft = Input.KEY_LEFT;
+    public static int control_walkRight = Input.KEY_RIGHT;
+    public static int control_attack = Input.KEY_LCONTROL;
 
     public Config(){
         load();
     }
 
-    public void load(){
+    public static void load(){
         File f = new File(CONFIG_FILE_LOCATION);
         if(!f.exists()){
             // see if ~/.ivytale/ exists
@@ -48,7 +48,7 @@ public class Config {
         parse(f);
     }
 
-    public void parse(File f){
+    public static void parse(File f){
         try {
             for(String l : Files.readAllLines(f.toPath())){
                 String line = l.trim().toUpperCase();
@@ -82,7 +82,7 @@ public class Config {
         }
     }
 
-    public int getKeyCode(String keyName){
+    public static int getKeyCode(String keyName){
         try {
             return Integer.parseInt(Input.class.getField(keyName).get(Input.class).toString());
         } catch (IllegalAccessException | NoSuchFieldException e) {

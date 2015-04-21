@@ -1,5 +1,7 @@
 package org.edwinh.ivytale.systems;
 
+import org.edwinh.ivytale.Config;
+import org.edwinh.ivytale.Game;
 import org.edwinh.ivytale.components.PhysicsComponent;
 import org.edwinh.ivytale.components.PlayerControlComponent;
 import org.edwinh.ivytale.components.PlayerStatsComponent;
@@ -15,7 +17,13 @@ public class PlayerControlSystem extends EntitySystem {
     @Override
     public void update(Entity[] entities, GameContainer gc, int dt) {
         for(Entity e : entities){
-
+            if(gc.getInput().isKeyDown(Config.control_walkLeft)){
+                ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class)).velocityX = ((PlayerStatsComponent) e.getComponentByClass(PlayerStatsComponent.class)).moveSpeed * -1;
+            }else if(gc.getInput().isKeyDown(Config.control_walkRight)){
+                ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class)).velocityX = ((PlayerStatsComponent) e.getComponentByClass(PlayerStatsComponent.class)).moveSpeed;
+            }else{
+                ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class)).velocityX = 0;
+            }
         }
     }
 
