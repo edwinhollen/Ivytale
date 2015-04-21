@@ -10,18 +10,22 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
  * A game using Slick2d
  */
 public class Game extends BasicGame {
+    public Config config;
+
     private AppGameContainer appgc;
     private ArrayList<EntitySystem> systems;
     private Scene currentScene;
 
     public Game() throws SlickException {
         super("Ivytale");
+        config = new Config();
         appgc = new AppGameContainer(this);
         appgc.setDisplayMode(800, 600, false);
         appgc.setForceExit(false);

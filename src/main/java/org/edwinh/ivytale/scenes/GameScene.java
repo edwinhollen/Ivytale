@@ -7,6 +7,7 @@ import org.edwinh.ivytale.components.PositionComponent;
 import org.edwinh.ivytale.entities.Entity;
 import org.edwinh.ivytale.systems.ImageSystem;
 import org.edwinh.ivytale.systems.PhysicsSystem;
+import org.edwinh.ivytale.systems.PlayerControlSystem;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
@@ -35,6 +36,7 @@ public class GameScene extends Scene {
         }
         this.systems.add(new ImageSystem());
         this.systems.add(new PhysicsSystem());
+        this.systems.add(new PlayerControlSystem());
     }
     @Override
     public void update(GameContainer gc, int dt) {
