@@ -21,6 +21,13 @@
 			<artifactId>slick2d-core</artifactId>
 			<version>1.0.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.newdawn</groupId>
+			<artifactId>slick-util</artifactId>
+			<version>0.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/target/local-libs/slick-util.jar</systemPath>
+		</dependency>
 	</dependencies>
 
 	<build>
