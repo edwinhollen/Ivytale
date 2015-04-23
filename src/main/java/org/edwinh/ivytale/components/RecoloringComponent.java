@@ -10,4 +10,9 @@ public class RecoloringComponent extends Component {
     public Color fillColor = new Color(0, 0, 255);
     public boolean shading = true;
     public boolean done = false;
+    public RecoloringComponent(Color keyColor, Color fillColor){
+        this.keyColor = keyColor;
+        this.fillColor = fillColor;
+    }
+    public RecoloringComponent(){}
 }

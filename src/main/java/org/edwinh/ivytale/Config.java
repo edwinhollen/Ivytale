@@ -13,6 +13,8 @@ import java.nio.file.StandardCopyOption;
 public class Config {
     public static final String CONFIG_FILE_LOCATION = System.getProperty("user.home")+"/.ivytale/config.txt";
 
+    public static final int renderWidth = 360;
+    public static final int renderHeight = 240;
     public static int screenWidth = 800;
     public static int screenHeight = 600;
     public static boolean vsync = true;

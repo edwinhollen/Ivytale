@@ -6,6 +6,7 @@ import org.edwinh.ivytale.systems.ImageSystem;
 import org.edwinh.ivytale.systems.PhysicsSystem;
 import org.edwinh.ivytale.systems.PlayerControlSystem;
 import org.edwinh.ivytale.systems.RecoloringSystem;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
@@ -21,7 +22,7 @@ public class GameScene extends Scene {
                 new PlayerControlComponent(),
                 new PhysicsComponent(),
                 new ImageComponent("character-idle.png"),
-                new RecoloringComponent(),
+                new RecoloringComponent(new Color(0, 255, 0), new Color(255, 216, 191)),
                 new PositionComponent(20, 20)
         };
 

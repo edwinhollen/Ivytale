@@ -14,16 +14,20 @@ public class Game extends BasicGame {
 
     public Game() throws SlickException {
         super("Ivytale");
-        config = new Config();
+        Config.load();
         AppGameContainer appgc = new AppGameContainer(this);
         appgc.setDisplayMode(Config.screenWidth, Config.screenHeight, false);
         appgc.setVSync(Config.vsync);
         appgc.setForceExit(false);
         appgc.start();
+
+
     }
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
+        g.scale((float) (Config.screenWidth / Config.renderWidth), (float) (Config.screenHeight / Config.renderHeight));
         currentScene.render(gc, g);
+
     }
 
     @Override

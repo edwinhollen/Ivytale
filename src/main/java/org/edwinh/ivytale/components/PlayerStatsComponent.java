@@ -7,5 +7,5 @@ import org.newdawn.slick.Color;
  */
 public class PlayerStatsComponent extends Component {
     public Color skinColor = new Color(255, 220, 184);
-    public double moveSpeed = 0.3;
+    public double moveSpeed = 8;
 }

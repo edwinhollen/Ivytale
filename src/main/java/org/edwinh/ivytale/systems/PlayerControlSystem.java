@@ -16,10 +16,11 @@ public class PlayerControlSystem extends EntitySystem {
     @Override
     public void update(Entity[] entities, GameContainer gc, int dt) {
         for(Entity e : entities){
+            double adjustedMoveSpeed = (((PlayerStatsComponent) e.getComponentByClass(PlayerStatsComponent.class)).moveSpeed) / 100;
             if(gc.getInput().isKeyDown(Config.control_walkLeft)){
-                ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class)).velocityX = ((PlayerStatsComponent) e.getComponentByClass(PlayerStatsComponent.class)).moveSpeed * -1;
+                ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class)).velocityX = adjustedMoveSpeed * -1;
             }else if(gc.getInput().isKeyDown(Config.control_walkRight)){
-                ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class)).velocityX = ((PlayerStatsComponent) e.getComponentByClass(PlayerStatsComponent.class)).moveSpeed;
+                ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class)).velocityX = adjustedMoveSpeed;
             }else{
                 ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class)).velocityX = 0;
             }
