@@ -1,17 +1,8 @@
 package org.edwinh.ivytale;
 
 import org.edwinh.ivytale.scenes.GameScene;
-import org.edwinh.ivytale.scenes.MenuScene;
 import org.edwinh.ivytale.scenes.Scene;
-import org.edwinh.ivytale.systems.EntitySystem;
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-
-import java.io.File;
-import java.util.ArrayList;
+import org.newdawn.slick.*;
 
 /**
  * A game using Slick2d
@@ -19,15 +10,14 @@ import java.util.ArrayList;
 public class Game extends BasicGame {
     public Config config;
 
-    private AppGameContainer appgc;
     private Scene currentScene;
 
     public Game() throws SlickException {
         super("Ivytale");
         config = new Config();
-        appgc = new AppGameContainer(this);
-        appgc.setDisplayMode(config.screenWidth, config.screenHeight, false);
-        appgc.setVSync(config.vsync);
+        AppGameContainer appgc = new AppGameContainer(this);
+        appgc.setDisplayMode(Config.screenWidth, Config.screenHeight, false);
+        appgc.setVSync(Config.vsync);
         appgc.setForceExit(false);
         appgc.start();
     }

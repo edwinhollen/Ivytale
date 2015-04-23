@@ -2,8 +2,8 @@ package org.edwinh.ivytale;
 
 import org.newdawn.slick.Input;
 
-import java.io.*;
-import java.net.URISyntaxException;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 

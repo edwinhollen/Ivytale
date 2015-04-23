@@ -13,7 +13,7 @@ public class PhysicsComponent extends Component{
         public int height = 0;
         public int offsetX = 0;
         public int offsetY = 0;
-        public Hitbox(){};
+        public Hitbox(){}
         public Hitbox(int width, int height){
             this.width = width;
             this.height = height;

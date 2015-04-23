@@ -7,14 +7,13 @@ import org.newdawn.slick.Graphics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by Fubar on 4/18/2015.
  */
 public abstract class Scene {
-    public ArrayList<EntitySystem> systems = new ArrayList<EntitySystem>();
-    public ArrayList<Entity> entities = new ArrayList<Entity>();
+    public ArrayList<EntitySystem> systems = new ArrayList<>();
+    public ArrayList<Entity> entities = new ArrayList<>();
     public void update(GameContainer gc, int dt){
         for(EntitySystem s : systems){
             ArrayList<Entity> relevantEntities = new ArrayList<>();

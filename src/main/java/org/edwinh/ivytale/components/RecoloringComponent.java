@@ -7,7 +7,7 @@ import org.newdawn.slick.Color;
  */
 public class RecoloringComponent extends Component {
     public Color keyColor = new Color(0, 255, 0);
-    public Color fillColor = new Color(0, 0, 0);
+    public Color fillColor = new Color(0, 0, 255);
     public boolean shading = true;
     public boolean done = false;
 }

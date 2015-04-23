@@ -4,8 +4,6 @@ import org.edwinh.ivytale.entities.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import java.util.ArrayList;
-
 /**
  * Created by Fubar on 4/18/2015.
  */

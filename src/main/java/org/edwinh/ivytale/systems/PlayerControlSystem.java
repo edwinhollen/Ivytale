@@ -1,7 +1,6 @@
 package org.edwinh.ivytale.systems;
 
 import org.edwinh.ivytale.Config;
-import org.edwinh.ivytale.Game;
 import org.edwinh.ivytale.components.PhysicsComponent;
 import org.edwinh.ivytale.components.PlayerControlComponent;
 import org.edwinh.ivytale.components.PlayerStatsComponent;
