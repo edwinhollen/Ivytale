@@ -1,7 +1,7 @@
 package org.edwinh.ivytale.scenes;
 
-import org.edwinh.ivytale.entities.Entity;
-import org.edwinh.ivytale.systems.EntitySystem;
+import org.edwinh.ivytale.Entity;
+import org.edwinh.ivytale.EntitySystem;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 

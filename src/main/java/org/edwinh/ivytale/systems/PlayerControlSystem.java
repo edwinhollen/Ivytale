@@ -1,11 +1,12 @@
 package org.edwinh.ivytale.systems;
 
 import org.edwinh.ivytale.Config;
+import org.edwinh.ivytale.EntitySystem;
 import org.edwinh.ivytale.components.PhysicsComponent;
 import org.edwinh.ivytale.components.PlayerControlComponent;
 import org.edwinh.ivytale.components.PlayerStatsComponent;
 import org.edwinh.ivytale.components.PositionComponent;
-import org.edwinh.ivytale.entities.Entity;
+import org.edwinh.ivytale.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 

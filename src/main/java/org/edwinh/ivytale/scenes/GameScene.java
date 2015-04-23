@@ -1,7 +1,8 @@
 package org.edwinh.ivytale.scenes;
 
+import org.edwinh.ivytale.Component;
 import org.edwinh.ivytale.components.*;
-import org.edwinh.ivytale.entities.Entity;
+import org.edwinh.ivytale.Entity;
 import org.edwinh.ivytale.systems.ImageSystem;
 import org.edwinh.ivytale.systems.PhysicsSystem;
 import org.edwinh.ivytale.systems.PlayerControlSystem;

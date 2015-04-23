@@ -1,5 +1,7 @@
 package org.edwinh.ivytale.components;
 
+import org.edwinh.ivytale.Component;
+
 /**
  * Created by Fubar on 4/18/2015.
  */

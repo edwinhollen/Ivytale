@@ -1,6 +1,6 @@
-package org.edwinh.ivytale.entities;
+package org.edwinh.ivytale;
 
-import org.edwinh.ivytale.components.Component;
+import org.edwinh.ivytale.Component;
 
 import java.util.ArrayList;
 

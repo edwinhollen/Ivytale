@@ -1,9 +1,11 @@
 package org.edwinh.ivytale.components;
 
+import org.edwinh.ivytale.Component;
+
 /**
  * Created by Fubar on 4/20/2015.
  */
-public class PhysicsComponent extends Component{
+public class PhysicsComponent extends Component {
     public double velocityX = 0;
     public double velocityY = 0;
     public Hitbox hitbox = new Hitbox();

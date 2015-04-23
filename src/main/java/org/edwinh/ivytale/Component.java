@@ -1,4 +1,4 @@
-package org.edwinh.ivytale.components;
+package org.edwinh.ivytale;
 
 /**
  * Created by Fubar on 4/18/2015.

@@ -1,8 +1,9 @@
 package org.edwinh.ivytale.systems;
 
+import org.edwinh.ivytale.EntitySystem;
 import org.edwinh.ivytale.components.ImageComponent;
 import org.edwinh.ivytale.components.PositionComponent;
-import org.edwinh.ivytale.entities.Entity;
+import org.edwinh.ivytale.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 

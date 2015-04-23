@@ -1,5 +1,6 @@
 package org.edwinh.ivytale.components;
 
+import org.edwinh.ivytale.Component;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 

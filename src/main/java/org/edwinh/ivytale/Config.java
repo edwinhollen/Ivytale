@@ -18,6 +18,7 @@ public class Config {
     public static int screenWidth = 800;
     public static int screenHeight = 600;
     public static boolean vsync = true;
+    public static boolean show_fps = false;
     public static int control_walkLeft = Input.KEY_LEFT;
     public static int control_walkRight = Input.KEY_RIGHT;
     public static int control_attack = Input.KEY_LCONTROL;
@@ -67,6 +68,8 @@ public class Config {
                         case "VSYNC":
                             vsync = Boolean.parseBoolean(val);
                             break;
+                        case "SHOW_FPS":
+                            show_fps = Boolean.parseBoolean(val);
                         case "WALK_LEFT":
                             control_walkLeft = getKeyCode(val);
                             break;

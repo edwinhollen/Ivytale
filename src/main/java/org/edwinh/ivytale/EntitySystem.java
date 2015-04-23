@@ -1,6 +1,5 @@
-package org.edwinh.ivytale.systems;
+package org.edwinh.ivytale;
 
-import org.edwinh.ivytale.entities.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 

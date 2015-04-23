@@ -19,6 +19,7 @@ public class Game extends BasicGame {
         appgc.setDisplayMode(Config.screenWidth, Config.screenHeight, false);
         appgc.setVSync(Config.vsync);
         appgc.setForceExit(false);
+        appgc.setShowFPS(Config.show_fps);
         appgc.start();
 
 
