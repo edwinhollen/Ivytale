@@ -9,12 +9,20 @@ import org.newdawn.slick.SlickException;
  */
 public class ImageComponent extends Component {
     public Image image;
-    public ImageComponent(String imageUrl){
+    public int offsetX = 0;
+    public int offsetY = 0;
+    public ImageComponent(){}
+    public ImageComponent(String image){
+        this(image, 0, 0);
+    }
+
+    public ImageComponent(String image, int offsetX, int offsetY) {
         try {
-            this.image = new Image(imageUrl);
-            this.image.setFilter(Image.FILTER_NEAREST);
+            this.image = new Image(image);
         } catch (SlickException e) {
             e.printStackTrace();
         }
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
     }
 }

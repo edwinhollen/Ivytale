@@ -11,6 +11,9 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * Created by Fubar on 4/18/2015.
  */
@@ -18,14 +21,18 @@ public class GameScene extends Scene {
 
     public GameScene(){
         Entity playerCharacter = new Entity();
-        playerCharacter.components = new Component[]{
-                new PlayerStatsComponent(),
-                new PlayerControlComponent(),
-                new PhysicsComponent(),
-                new ImageComponent("character-idle.png"),
-                new RecoloringComponent(new Color(0, 255, 0), new Color(255, 216, 191)),
-                new PositionComponent(20, 20)
-        };
+        playerCharacter.components.add(new PlayerStatsComponent());
+        playerCharacter.components.add(new PlayerControlComponent());
+        playerCharacter.components.add(new PhysicsComponent());
+        playerCharacter.components.add(new ImageComponent());
+        playerCharacter.components.add(new AnimationComponent(new AnimationFrame[]{
+            new AnimationFrame("character-idle.png", 500),
+            new AnimationFrame("character-idle.png", 2000),
+            new AnimationFrame("character-idle.png", 2000),
+            new AnimationFrame("character-idle.png", 500)
+        }));
+        playerCharacter.components.add(new RecoloringComponent(new Color(0, 255, 0), new Color(255, 216, 191)));
+        playerCharacter.components.add(new PositionComponent(20, 20));
 
         this.entities.add(playerCharacter);
 

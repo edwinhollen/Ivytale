@@ -4,6 +4,8 @@ import org.edwinh.ivytale.scenes.GameScene;
 import org.edwinh.ivytale.scenes.Scene;
 import org.newdawn.slick.*;
 
+import java.time.Instant;
+
 /**
  * A game using Slick2d
  */
