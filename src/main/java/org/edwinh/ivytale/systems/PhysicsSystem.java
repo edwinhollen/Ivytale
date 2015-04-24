@@ -11,6 +11,11 @@ import org.newdawn.slick.Graphics;
  * Created by Fubar on 4/20/2015.
  */
 public class PhysicsSystem extends EntitySystem {
+    public PhysicsSystem(){
+        this.acceptedComponents.add(PositionComponent.class);
+        this.acceptedComponents.add(PhysicsComponent.class);
+    }
+
     @Override
     public void update(Entity[] entities, GameContainer gc, int dt) {
         for(Entity e : entities){
@@ -24,11 +29,4 @@ public class PhysicsSystem extends EntitySystem {
 
     }
 
-    @Override
-    public Class[] getAcceptedComponents() {
-        return new Class[]{
-                PositionComponent.class,
-                PhysicsComponent.class
-        };
-    }
 }

@@ -1,10 +1,7 @@
 package org.edwinh.ivytale;
 
 import org.edwinh.ivytale.scenes.GameScene;
-import org.edwinh.ivytale.scenes.Scene;
 import org.newdawn.slick.*;
-
-import java.time.Instant;
 
 /**
  * A game using Slick2d
@@ -23,8 +20,12 @@ public class Game extends BasicGame {
         appgc.setForceExit(false);
         appgc.setShowFPS(Config.show_fps);
         appgc.start();
+    }
 
 
+    @Override
+    public void init(GameContainer gc) throws SlickException {
+        currentScene = new GameScene();
     }
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
@@ -33,10 +34,6 @@ public class Game extends BasicGame {
 
     }
 
-    @Override
-    public void init(GameContainer gc) throws SlickException {
-        currentScene = new GameScene();
-    }
 
     @Override
     public void update(GameContainer gc, int dt) throws SlickException {

@@ -19,6 +19,7 @@ public class ImageComponent extends Component {
     public ImageComponent(String image, int offsetX, int offsetY) {
         try {
             this.image = new Image(image);
+            this.image.setFilter(Image.FILTER_NEAREST);
         } catch (SlickException e) {
             e.printStackTrace();
         }

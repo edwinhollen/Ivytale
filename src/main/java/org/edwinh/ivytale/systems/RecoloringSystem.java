@@ -6,10 +6,19 @@ import org.edwinh.ivytale.components.RecoloringComponent;
 import org.edwinh.ivytale.Entity;
 import org.newdawn.slick.*;
 
+import java.util.Arrays;
+
 /**
  * Created by fubar on 4/21/15.
  */
 public class RecoloringSystem extends EntitySystem {
+    public RecoloringSystem(){
+        this.acceptedComponents.addAll(Arrays.asList(
+            ImageComponent.class,
+            RecoloringComponent.class
+        ));
+    }
+
     @Override
     public void update(Entity[] entities, GameContainer gc, int dt) {
 
@@ -42,13 +51,5 @@ public class RecoloringSystem extends EntitySystem {
             }
             ((RecoloringComponent) e.getComponentByClass(RecoloringComponent.class)).done = true;
         }
-    }
-
-    @Override
-    public Class[] getAcceptedComponents() {
-        return new Class[]{
-                ImageComponent.class,
-                RecoloringComponent.class
-        };
     }
 }
