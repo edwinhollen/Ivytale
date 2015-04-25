@@ -23,7 +23,7 @@ public class AnimationSystem extends EntitySystem {
     }
 
     @Override
-    public void update(Entity[] entities, GameContainer gc, int dt) {
+    public void update(ArrayList<Entity> entities, GameContainer gc, int dt) {
         for(Entity e : entities){
             System.out.println("anim entity");
             long now = Instant.now().getEpochSecond();
@@ -32,7 +32,7 @@ public class AnimationSystem extends EntitySystem {
     }
 
     @Override
-    public void render(Entity[] entities, GameContainer gc, Graphics g) {
+    public void render(ArrayList<Entity> entities, GameContainer gc, Graphics g) {
 
     }
 }

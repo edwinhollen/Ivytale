@@ -7,6 +7,8 @@ import org.edwinh.ivytale.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+import java.util.ArrayList;
+
 /**
  * Created by Fubar on 4/20/2015.
  */
@@ -17,7 +19,7 @@ public class PhysicsSystem extends EntitySystem {
     }
 
     @Override
-    public void update(Entity[] entities, GameContainer gc, int dt) {
+    public void update(ArrayList<Entity> entities, GameContainer gc, int dt) {
         for(Entity e : entities){
             ((PositionComponent) e.getComponentByClass(PositionComponent.class)).x += ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class)).velocityX * dt;
             ((PositionComponent) e.getComponentByClass(PositionComponent.class)).y += ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class)).velocityY * dt;
@@ -25,7 +27,7 @@ public class PhysicsSystem extends EntitySystem {
     }
 
     @Override
-    public void render(Entity[] entities, GameContainer gc, Graphics g) {
+    public void render(ArrayList<Entity> entities, GameContainer gc, Graphics g) {
 
     }
 

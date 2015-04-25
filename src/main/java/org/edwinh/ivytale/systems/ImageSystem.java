@@ -24,12 +24,12 @@ public class ImageSystem extends EntitySystem {
 
 
     @Override
-    public void update(Entity[] entities, GameContainer gc, int dt) {
+    public void update(ArrayList<Entity> entities, GameContainer gc, int dt) {
 
     }
 
     @Override
-    public void render(Entity[] entities, GameContainer gc, Graphics g) {
+    public void render(ArrayList<Entity> entities, GameContainer gc, Graphics g) {
         for(Entity e : entities){
             g.drawImage(
                     ((ImageComponent) e.getComponentByClass(ImageComponent.class)).image,

@@ -10,6 +10,7 @@ import org.edwinh.ivytale.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -26,7 +27,7 @@ public class PlayerControlSystem extends EntitySystem {
     }
 
     @Override
-    public void update(Entity[] entities, GameContainer gc, int dt) {
+    public void update(ArrayList<Entity> entities, GameContainer gc, int dt) {
         for(Entity e : entities){
             double adjustedMoveSpeed = (((PlayerStatsComponent) e.getComponentByClass(PlayerStatsComponent.class)).moveSpeed) / 100;
             if(gc.getInput().isKeyDown(Config.control_walkLeft)){
@@ -40,7 +41,7 @@ public class PlayerControlSystem extends EntitySystem {
     }
 
     @Override
-    public void render(Entity[] entities, GameContainer gc, Graphics g) {
+    public void render(ArrayList<Entity> entities, GameContainer gc, Graphics g) {
 
     }
 
