@@ -1,6 +1,5 @@
 package org.edwinh.ivytale.systems;
 
-import org.edwinh.ivytale.Component;
 import org.edwinh.ivytale.EntitySystem;
 import org.edwinh.ivytale.components.ImageComponent;
 import org.edwinh.ivytale.components.PositionComponent;
