@@ -1,0 +1,14 @@
+{
+  "character_walk": {
+    "keyColor": [0, 255, 0],
+    "fillColor": [255, 229, 204],
+    "delay": 120,
+    "loop": true,
+    "frames": [
+      "character-walk1.png",
+      "character-walk2.png",
+      "character-walk3.png",
+      "character-walk4.png"
+    ]
+  }
+}

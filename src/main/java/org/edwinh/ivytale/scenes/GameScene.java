@@ -22,13 +22,7 @@ public class GameScene extends Scene {
         playerCharacter.components.add(new PhysicsComponent());
         //playerCharacter.components.add(new ImageComponent("character-idle.png", new Color(0, 255, 0), new Color(255, 0, 0)));
         playerCharacter.components.add(new PositionComponent(20, 20));
-        playerCharacter.components.add(new AnimationComponent(Arrays.asList(
-                new ImageComponent("character-walk1.png"),
-                new ImageComponent("character-walk2.png"),
-                new ImageComponent("character-walk3.png"),
-                new ImageComponent("character-walk4.png")
-                ),120
-        ));
+        playerCharacter.components.add(AnimationSystem.loadAnimation("character_walk"));
 
         this.entities.add(playerCharacter);
 
