@@ -5,6 +5,8 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import java.util.List;
+
 /**
  * Created by Fubar on 4/19/2015.
  */
@@ -59,6 +61,4 @@ public class ImageComponent extends Component {
     public ImageComponent(String image, Color keyColor, Color fillColor){
         this(image, 0, 0, keyColor, fillColor, false);
     }
-
-
 }
