@@ -1,17 +1,20 @@
 package org.edwinh.ivytale;
 
+import org.json.JSONObject;
 import org.newdawn.slick.Input;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Scanner;
 
 /**
  * Created by Fubar on 4/20/2015.
  */
 public class Config {
-    public static final String CONFIG_FILE_LOCATION = System.getProperty("user.home")+"/.ivytale/config.txt";
+    public static final String CONFIG_FILE_LOCATION = System.getProperty("user.home")+"/.ivytale/config.json";
 
     public static final int renderWidth = 360;
     public static final int renderHeight = 240;
@@ -39,7 +42,7 @@ public class Config {
                 }
             }
             // copy the default config
-            File defaultConfig = new File(ClassLoader.class.getResource("/default_config.txt").getFile());
+            File defaultConfig = new File(ClassLoader.class.getResource("/default_config.json").getFile());
             System.out.println(defaultConfig.getAbsolutePath());
             try {
                 System.out.println("Copying default config file...");
@@ -53,36 +56,12 @@ public class Config {
 
     public static void parse(File f){
         try {
-            for(String l : Files.readAllLines(f.toPath())){
-                String line = l.trim().toUpperCase();
-                if(!(line.startsWith("#") || line.isEmpty())){
-                    String key = line.split("=")[0];
-                    String val = line.split("=")[1];
-                    switch(key){
-                        case "WIDTH":
-                            screenWidth = Integer.parseInt(val);
-                            break;
-                        case "HEIGHT":
-                            screenHeight = Integer.parseInt(val);
-                            break;
-                        case "VSYNC":
-                            vsync = Boolean.parseBoolean(val);
-                            break;
-                        case "SHOW_FPS":
-                            show_fps = Boolean.parseBoolean(val);
-                        case "WALK_LEFT":
-                            control_walkLeft = getKeyCode(val);
-                            break;
-                        case "WALK_RIGHT":
-                            control_walkRight = getKeyCode(val);
-                            break;
-                        case "ATTACK":
-                            control_attack = getKeyCode(val);
-                            break;
-                    }
-                }
-            }
-        } catch (IOException e) {
+            JSONObject configObject = new JSONObject(new Scanner(f).useDelimiter("\\A").next());
+            screenWidth = configObject.getInt("width");
+            screenHeight = configObject.getInt("height");
+            vsync = configObject.getBoolean("vsync");
+            show_fps = configObject.getBoolean("show_fps");
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
