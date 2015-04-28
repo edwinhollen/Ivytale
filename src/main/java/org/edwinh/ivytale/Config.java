@@ -61,6 +61,9 @@ public class Config {
             screenHeight = configObject.getInt("height");
             vsync = configObject.getBoolean("vsync");
             show_fps = configObject.getBoolean("show_fps");
+            control_attack = getKeyCode(configObject.getString("attack"));
+            control_walkLeft = getKeyCode(configObject.getString("walk_left"));
+            control_walkRight = getKeyCode(configObject.getString("walk_right"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -68,7 +71,7 @@ public class Config {
 
     public static int getKeyCode(String keyName){
         try {
-            return Integer.parseInt(Input.class.getField(keyName).get(Input.class).toString());
+            return Integer.parseInt(Input.class.getField(keyName.toUpperCase()).get(Input.class).toString());
         } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
         }
