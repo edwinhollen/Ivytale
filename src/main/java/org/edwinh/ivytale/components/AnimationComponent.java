@@ -3,25 +3,15 @@ package org.edwinh.ivytale.components;
 import org.edwinh.ivytale.Component;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by fubar on 4/23/15.
+ * Created by fubar on 4/28/15.
  */
 public class AnimationComponent extends Component {
+    public String name = null;
     public int currentFrame = 0;
     public long lastFrame = Instant.now().toEpochMilli();
-    public int delay = 5000;
-    public boolean looping = true;
-    public List<ImageComponent> frames = new ArrayList<>();
-    public AnimationComponent(List<ImageComponent> frames, int delay, boolean looping){
-        this.frames = frames;
-        this.delay = delay;
-        this.looping = looping;
-    }
-    public AnimationComponent(List<ImageComponent> frames, int delay){
-        this(frames, delay, true);
+    public AnimationComponent(String name){
+        this.name = name;
     }
 }
-
