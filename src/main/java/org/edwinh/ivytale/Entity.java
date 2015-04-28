@@ -3,9 +3,8 @@ package org.edwinh.ivytale;
 import org.edwinh.ivytale.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Fubar on 4/19/2015.
@@ -13,11 +12,7 @@ import java.util.List;
 public class Entity {
     public ArrayList<Component> components = new ArrayList<>();
     public ArrayList<Class> getComponentsAsClasses(){
-        ArrayList<Class> classes = new ArrayList<>();
-        for(Component c : components){
-            classes.add(c.getClass());
-        }
-        return classes;
+        return components.stream().map(Component::getClass).collect(Collectors.toCollection(ArrayList::new));
     }
     public Component getComponentByClass(Class needle){
         for(Component c : components){

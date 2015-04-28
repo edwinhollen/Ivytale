@@ -5,18 +5,13 @@ import org.edwinh.ivytale.EntitySystem;
 import org.edwinh.ivytale.components.AnimationComponent;
 import org.edwinh.ivytale.components.ImageComponent;
 import org.edwinh.ivytale.components.PositionComponent;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONString;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import java.io.IOException;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,8 +53,7 @@ public class AnimationSystem extends EntitySystem {
     }
 
     public static AnimationComponent loadAnimation(String name){
-        JSONObject animationsJson = null;
-        animationsJson = new JSONObject(new Scanner(ClassLoader.class.getResourceAsStream("/animations.json"), "UTF-8").useDelimiter("\\A").next());
+        JSONObject animationsJson = new JSONObject(new Scanner(ClassLoader.class.getResourceAsStream("/animations.json"), "UTF-8").useDelimiter("\\A").next());
         try {
             JSONObject animationObject = animationsJson.getJSONObject(name);
             List<ImageComponent> frames = new ArrayList<>();

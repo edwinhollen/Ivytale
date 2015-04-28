@@ -1,10 +1,8 @@
 package org.edwinh.ivytale.components;
 
 import org.edwinh.ivytale.Component;
-import org.newdawn.slick.Image;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

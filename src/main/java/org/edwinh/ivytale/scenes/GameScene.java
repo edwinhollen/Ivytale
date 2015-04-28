@@ -4,11 +4,8 @@ import org.edwinh.ivytale.Scene;
 import org.edwinh.ivytale.components.*;
 import org.edwinh.ivytale.Entity;
 import org.edwinh.ivytale.systems.*;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-
-import java.util.Arrays;
 
 /**
  * Created by Fubar on 4/18/2015.

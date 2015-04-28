@@ -5,8 +5,6 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-import java.util.List;
-
 /**
  * Created by Fubar on 4/19/2015.
  */
