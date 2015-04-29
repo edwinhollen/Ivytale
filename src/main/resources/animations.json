@@ -2,6 +2,7 @@
   "character_walk": {
     "keyColor": [0, 255, 0],
     "fillColor": [255, 229, 204],
+    "shading": true,
     "delay": 120,
     "loop": true,
     "frames": [

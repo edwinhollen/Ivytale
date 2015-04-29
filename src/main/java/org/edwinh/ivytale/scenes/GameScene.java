@@ -1,9 +1,11 @@
 package org.edwinh.ivytale.scenes;
 
+import org.edwinh.ivytale.Config;
 import org.edwinh.ivytale.Scene;
 import org.edwinh.ivytale.components.*;
 import org.edwinh.ivytale.Entity;
 import org.edwinh.ivytale.systems.*;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
@@ -18,7 +20,8 @@ public class GameScene extends Scene {
         playerCharacter.components.add(new PlayerControlComponent());
         playerCharacter.components.add(new PhysicsComponent());
         playerCharacter.components.add(new PositionComponent(20, 20));
-        playerCharacter.components.add(new AnimationComponent("character_walk"));
+        //playerCharacter.components.add(new AnimationComponent("character_walk"));
+        playerCharacter.components.add(new ImageComponent("character-idle-shaded.png", new Color(0, 255, 0), new Color(255, 230, 209), true));
 
         this.entities.add(playerCharacter);
 

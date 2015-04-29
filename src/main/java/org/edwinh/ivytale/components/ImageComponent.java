@@ -32,16 +32,44 @@ public class ImageComponent extends Component {
     public ImageComponent(String image, int offsetX, int offsetY, Color keyColor, Color fillColor, boolean respectShading){
         this(image, offsetX, offsetY);
         // recolor
+
         for(int x = 0; x < this.image.getWidth(); x++){
             for(int y = 0; y < this.image.getHeight(); y++){
                 Color pixel = this.image.getColor(x, y);
+                System.out.println(pixel.getRed()+","+pixel.getGreen()+","+pixel.getBlue()+","+pixel.getAlpha());
+                if(pixel.getAlpha() < 1){
+                    continue;
+                }
+                Color newFillColor;
                 if(pixel.equals(keyColor)){
-                    try {
-                        this.image.getGraphics().setColor(fillColor);
-                        this.image.getGraphics().fillRect((float) x, (float) y, 1, 1);
-                    } catch (SlickException e1) {
-                        e1.printStackTrace();
+                    newFillColor = new Color(fillColor);
+                }else if(respectShading &&
+                        (keyColor.getGreen() > 0 && pixel.getGreen() > 0) ||
+                        (keyColor.getRed() > 0 && pixel.getRed() > 0) ||
+                        (keyColor.getBlue() > 0 && pixel.getBlue() > 0)
+                        ){
+                    int adjRed = 0;
+                    int adjGreen = 0;
+                    int adjBlue = 0;
+                    if(keyColor.getGreen() > 0 && pixel.getGreen() > 0){
+                        System.out.println("keying for green");
+                        adjGreen = 255 - pixel.getGreen();
+                    }else if(keyColor.getRed() > 0 && pixel.getRed() > 0){
+                        System.out.println("keying for red");
+                        adjRed = 255 - pixel.getRed();
+                    }else if(keyColor.getBlue() > 0 && pixel.getBlue() > 0){
+                        System.out.println("keying for blue");
+                        adjBlue = 255 - pixel.getRed();
                     }
+                    newFillColor = new Color(fillColor.getRed() - adjRed, fillColor.getGreen() - adjGreen, fillColor.getBlue() - adjBlue);
+                }else{
+                    continue;
+                }
+                try {
+                    this.image.getGraphics().setColor(newFillColor);
+                    this.image.getGraphics().fillRect((float) x, (float) y, 1, 1);
+                } catch (SlickException e1) {
+                    e1.printStackTrace();
                 }
             }
         }
