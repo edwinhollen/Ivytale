@@ -36,7 +36,6 @@ public class ImageComponent extends Component {
         for(int x = 0; x < this.image.getWidth(); x++){
             for(int y = 0; y < this.image.getHeight(); y++){
                 Color pixel = this.image.getColor(x, y);
-                System.out.println(pixel.getRed()+","+pixel.getGreen()+","+pixel.getBlue()+","+pixel.getAlpha());
                 if(pixel.getAlpha() < 1){
                     continue;
                 }

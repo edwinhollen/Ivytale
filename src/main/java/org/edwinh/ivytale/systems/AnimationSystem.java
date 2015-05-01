@@ -46,7 +46,7 @@ public class AnimationSystem extends EntitySystem {
                                 animationObject.getJSONArray("fillColor").getInt(1),
                                 animationObject.getJSONArray("fillColor").getInt(2)
                         );
-                        ic = new ImageComponent(animationObject.getJSONArray("frames").getString(i), keyColor, fillColor);
+                        ic = new ImageComponent(animationObject.getJSONArray("frames").getString(i), keyColor, fillColor, animationObject.optBoolean("shading", false));
                     }catch(JSONException e){
                         ic = new ImageComponent(animationObject.getJSONArray("frames").getString(i));
                     }
