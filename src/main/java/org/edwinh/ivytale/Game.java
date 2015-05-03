@@ -29,7 +29,7 @@ public class Game extends BasicGame {
     }
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
-        g.scale((float) (Config.screenWidth / Config.renderWidth), (float) (Config.screenHeight / Config.renderHeight));
+        g.scale((float) (gc.getWidth() / Config.renderWidth), (float) (gc.getHeight() / Config.renderHeight));
         currentScene.render(gc, g);
 
     }

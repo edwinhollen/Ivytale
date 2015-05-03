@@ -1,6 +1,8 @@
 [
   {
     "name": "test",
+    "background": "bluesky.png",
+    "gravity": 1.0,
     "pieces": [
       {
         "type": "grass-single",

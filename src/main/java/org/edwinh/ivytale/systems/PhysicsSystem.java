@@ -13,7 +13,14 @@ import java.util.ArrayList;
  * Created by Fubar on 4/20/2015.
  */
 public class PhysicsSystem extends EntitySystem {
+    public double gravity = 1.0;
+
     public PhysicsSystem(){
+        this(1.0);
+    }
+
+    public PhysicsSystem(double gravity){
+        this.gravity = gravity;
         this.acceptedComponents.add(PositionComponent.class);
         this.acceptedComponents.add(PhysicsComponent.class);
     }
