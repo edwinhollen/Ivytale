@@ -1,6 +1,7 @@
 package org.edwinh.ivytale.scenes;
 
 import org.edwinh.ivytale.Config;
+import org.edwinh.ivytale.LevelLoader;
 import org.edwinh.ivytale.Scene;
 import org.edwinh.ivytale.components.*;
 import org.edwinh.ivytale.Entity;
@@ -24,6 +25,7 @@ public class GameScene extends Scene {
         //playerCharacter.components.add(new ImageComponent("character-idle-shaded.png", new Color(0, 255, 0), new Color(255, 230, 209), true));
 
         this.entities.add(playerCharacter);
+        this.entities.addAll(LevelLoader.load("test"));
 
         this.systems.add(new ImageSystem());
         this.systems.add(new PhysicsSystem());

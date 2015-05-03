@@ -1,0 +1,11 @@
+{
+  "grass-single": {
+    "image": "grass-single.png",
+    "hitbox": {
+      "x": 0,
+      "y": 0,
+      "width": 44,
+      "height": 13
+    }
+  }
+}

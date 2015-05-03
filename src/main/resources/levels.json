@@ -1,0 +1,22 @@
+[
+  {
+    "name": "test",
+    "pieces": [
+      {
+        "type": "grass-single",
+        "x": 0,
+        "y": 50
+      },
+      {
+        "type": "grass-single",
+        "x": 100,
+        "y": 70
+      },
+      {
+        "type": "grass-single",
+        "x": 200,
+        "y": 90
+      }
+    ]
+  }
+]
