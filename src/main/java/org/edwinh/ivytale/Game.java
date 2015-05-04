@@ -7,14 +7,12 @@ import org.newdawn.slick.*;
  * A game using Slick2d
  */
 public class Game extends BasicGame {
-    public Config config;
-
     private Scene currentScene;
 
     public Game() throws SlickException {
-        super("Ivytale");
-        Config.load();
-        AppGameContainer appgc = new AppGameContainer(this);
+        super(Config.title);
+
+        AppGameContainer appgc = new AppGameContainer(new ScalableGame(this, Config.renderWidth, Config.renderHeight, false));
         appgc.setDisplayMode(Config.screenWidth, Config.screenHeight, false);
         appgc.setVSync(Config.vsync);
         appgc.setForceExit(false);
@@ -29,9 +27,17 @@ public class Game extends BasicGame {
     }
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
-        g.scale((float) (gc.getWidth() / Config.renderWidth), (float) (gc.getHeight() / Config.renderHeight));
         currentScene.render(gc, g);
+    }
 
+    @Override
+    public boolean closeRequested() {
+        return true;
+    }
+
+    @Override
+    public String getTitle() {
+        return String.format("%s (%s)", Config.title, Config.version);
     }
 
 

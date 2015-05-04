@@ -14,10 +14,13 @@ import java.util.Scanner;
  * Created by Fubar on 4/20/2015.
  */
 public class Config {
+    public static final String title = "Ivytale";
+    public static final String version = "0.1";
+
     public static final String CONFIG_FILE_LOCATION = System.getProperty("user.home")+"/.ivytale/config.json";
 
-    public static final int renderWidth = 360;
-    public static final int renderHeight = 240;
+    public static final int renderWidth = 400;
+    public static final int renderHeight = 300;
     public static int screenWidth = 800;
     public static int screenHeight = 600;
     public static boolean vsync = true;
