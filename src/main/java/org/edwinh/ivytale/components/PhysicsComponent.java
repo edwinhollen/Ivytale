@@ -1,8 +1,8 @@
 package org.edwinh.ivytale.components;
-
 import org.edwinh.ivytale.Component;
 import org.edwinh.ivytale.Entity;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,8 @@ import java.util.List;
 public class PhysicsComponent extends Component {
     public double velocityX = 0;
     public double velocityY = 0;
-    public Rectangle hitbox;
     public boolean fixed = false;
-    public List<Entity> collisions = new ArrayList<>();
+    public Rectangle hitbox;
 
     public PhysicsComponent(Rectangle hitbox, boolean fixed){
         this.hitbox = hitbox;
