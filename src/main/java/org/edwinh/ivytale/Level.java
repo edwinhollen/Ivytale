@@ -45,10 +45,11 @@ public class Level {
                     levelPieceEntity.components.add(new PositionComponent(levelPieceX, levelPieceY));
                     levelPieceEntity.components.add(new ImageComponent(allPieces.getJSONObject(levelPieceType).getString("image")));
                     levelPieceEntity.components.add(new PhysicsComponent(
+                            allPieces.getJSONObject(levelPieceType).getJSONObject("hitbox").getInt("width"),
+                            allPieces.getJSONObject(levelPieceType).getJSONObject("hitbox").getInt("height"),
                             allPieces.getJSONObject(levelPieceType).getJSONObject("hitbox").getInt("x"),
                             allPieces.getJSONObject(levelPieceType).getJSONObject("hitbox").getInt("y"),
-                            allPieces.getJSONObject(levelPieceType).getJSONObject("hitbox").getInt("width"),
-                            allPieces.getJSONObject(levelPieceType).getJSONObject("hitbox").getInt("height")
+                            true
                     ));
                     this.entities.add(levelPieceEntity);
                 }

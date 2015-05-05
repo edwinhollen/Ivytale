@@ -4,12 +4,14 @@ import org.edwinh.ivytale.Component;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
  * Created by Fubar on 4/19/2015.
  */
 public class Entity {
+    public String id = UUID.randomUUID().toString();
     public ArrayList<Component> components = new ArrayList<>();
     public ArrayList<Class> getComponentsAsClasses(){
         return components.stream().map(Component::getClass).collect(Collectors.toCollection(ArrayList::new));
