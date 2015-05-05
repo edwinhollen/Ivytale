@@ -2,10 +2,7 @@ package org.edwinh.ivytale.systems;
 
 import org.edwinh.ivytale.Config;
 import org.edwinh.ivytale.EntitySystem;
-import org.edwinh.ivytale.components.PhysicsComponent;
-import org.edwinh.ivytale.components.PlayerControlComponent;
-import org.edwinh.ivytale.components.PlayerStatsComponent;
-import org.edwinh.ivytale.components.PositionComponent;
+import org.edwinh.ivytale.components.*;
 import org.edwinh.ivytale.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -29,13 +26,26 @@ public class PlayerControlSystem extends EntitySystem {
     @Override
     public void update(ArrayList<Entity> entities, GameContainer gc, int dt) {
         for(Entity e : entities){
+            PhysicsComponent phys = ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class));
+            AnimationComponent anim = ((AnimationComponent) e.getComponentByClass(AnimationComponent.class));
+
+
             double adjustedMoveSpeed = (((PlayerStatsComponent) e.getComponentByClass(PlayerStatsComponent.class)).moveSpeed) / 10;
             if(gc.getInput().isKeyDown(Config.control_walkRight)) {
-                ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class)).velocityX = adjustedMoveSpeed;
+                phys.velocityX = adjustedMoveSpeed;
+                if(!anim.name.equals("character_walk")){
+                    anim.change("character_walk");
+                }
             }else if(gc.getInput().isKeyDown(Config.control_walkLeft)) {
-                ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class)).velocityX = adjustedMoveSpeed * -1;
+                phys.velocityX = adjustedMoveSpeed * -1;
+                if(!anim.name.equals("character_walk")){
+                    anim.change("character_walk");
+                }
             }else{
-                ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class)).velocityX = 0;
+                phys.velocityX = 0;
+                if(!anim.name.equals("character_stand")){
+                    anim.change("character_stand");
+                }
             }
         }
     }

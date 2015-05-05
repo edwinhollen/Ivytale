@@ -11,5 +11,15 @@
       "character-walk3.png",
       "character-walk4.png"
     ]
+  },
+  "character_stand": {
+    "keyColor": [0, 255, 0],
+    "fillColor": [255, 229, 204],
+    "shading": true,
+    "delay": 120,
+    "loop": true,
+    "frames": [
+      "character-idle.png"
+    ]
   }
 }
