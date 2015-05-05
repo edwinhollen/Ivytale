@@ -35,21 +35,59 @@ public class PhysicsSystem extends EntitySystem {
 
     @Override
     public void update(ArrayList<Entity> entities, GameContainer gc, int dt) {
+
         // add items to quadtree
-        quadtree.clear();
+        //quadtree.clear();
         for(Entity e : entities){
             PositionComponent pos = (PositionComponent) e.getComponentByClass(PositionComponent.class);
             PhysicsComponent phys = ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class));
 
+            // apply gravity
+            if(!phys.fixed){
+                phys.velocityY += (this.gravity / 100) * dt;
+            }
+
+            Rectangle eCorrectedHitbox = new Rectangle(
+                (float) (pos.x + phys.hitbox.getX() + phys.velocityX),
+                (float) (pos.y + phys.hitbox.getY() + phys.velocityY),
+                phys.hitbox.getWidth(),
+                phys.hitbox.getHeight()
+            );
+
+
+
+            for(Entity otherEntity : entities){
+                if(otherEntity == e) continue;
+                PositionComponent otherPos = (PositionComponent) otherEntity.getComponentByClass(PositionComponent.class);
+                PhysicsComponent otherPhys = ((PhysicsComponent) otherEntity.getComponentByClass(PhysicsComponent.class));
+                if(!otherPhys.fixed) continue;
+                Rectangle otherCorrectedHitbox = new Rectangle(
+                        (float) (otherPos.x + otherPhys.hitbox.getX() + otherPhys.velocityX),
+                        (float) (otherPos.y + otherPhys.hitbox.getY() + otherPhys.velocityY),
+                        otherPhys.hitbox.getWidth(),
+                        otherPhys.hitbox.getHeight()
+                );
+                if(eCorrectedHitbox.intersects(otherCorrectedHitbox)){
+                    if(eCorrectedHitbox.getCenterY() < otherCorrectedHitbox.getCenterY()){
+                        phys.velocityY = 0;
+                    }
+                }
+            }
+
+            pos.x += phys.velocityX;
+            pos.y += phys.velocityY;
+
+            /*
             quadtree.insert(new Rectangle(
                     (float) pos.x + phys.hitboxOffsetX,
                     (float) pos.y + phys.hitboxOffsetY,
                     phys.hitboxWidth,
                     phys.hitboxHeight
             ));
+            */
         }
-
-        List returnObjects = new ArrayList<>();
+        /*
+        List<Rectangle> returnObjects = new ArrayList<>();
         for(Entity e : entities){
             PositionComponent pos = (PositionComponent) e.getComponentByClass(PositionComponent.class);
             PhysicsComponent phys = ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class));
@@ -61,6 +99,7 @@ public class PhysicsSystem extends EntitySystem {
                     phys.hitboxHeight
             ));
         }
+        */
     }
 
     @Override
@@ -69,7 +108,7 @@ public class PhysicsSystem extends EntitySystem {
             PositionComponent pos = (PositionComponent) e.getComponentByClass(PositionComponent.class);
             PhysicsComponent phys = ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class));
             g.setColor(Color.red);
-            g.fillRect((int) pos.x + phys.hitboxOffsetX, (int) pos.y + phys.hitboxOffsetY, phys.hitboxWidth, phys.hitboxHeight);
+            g.fillRect((int) pos.x + phys.hitbox.getX(), (int) pos.y + phys.hitbox.getY(), phys.hitbox.getWidth(), phys.hitbox.getHeight());
         }
     }
 
@@ -81,7 +120,7 @@ public class PhysicsSystem extends EntitySystem {
         private static final int MAX_LEVELS = 5;
 
         private int level;
-        private List objects;
+        private List<Rectangle> objects;
         private Rectangle bounds;
         private Quadtree[] nodes;
 
@@ -158,16 +197,16 @@ public class PhysicsSystem extends EntitySystem {
 
                 int i = 0;
                 while(i < objects.size()){
-                    int index = getIndex((Rectangle) objects.get(i));
+                    int index = getIndex(objects.get(i));
                     if(index != -1){
-                        nodes[index].insert((Rectangle) objects.remove(i));
+                        nodes[index].insert(objects.remove(i));
                     }else{
                         i++;
                     }
                 }
             }
         }
-        public List retrieve(List returnObjects, Rectangle pRect){
+        public List retrieve(List<Rectangle> returnObjects, Rectangle pRect){
             int index = getIndex(pRect);
             if(index != -1 && nodes[0] != null){
                 nodes[index].retrieve(returnObjects, pRect);

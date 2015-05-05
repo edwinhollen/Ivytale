@@ -7,6 +7,7 @@ import org.edwinh.ivytale.Entity;
 import org.edwinh.ivytale.systems.*;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Rectangle;
 
 /**
  * Created by Fubar on 4/18/2015.
@@ -17,7 +18,7 @@ public class GameScene extends Scene {
         Entity playerCharacter = new Entity();
         playerCharacter.components.add(new PlayerStatsComponent());
         playerCharacter.components.add(new PlayerControlComponent());
-        playerCharacter.components.add(new PhysicsComponent(22, 37, 0, 0));
+        playerCharacter.components.add(new PhysicsComponent(new Rectangle(0, 0, 22, 37)));
         playerCharacter.components.add(new PositionComponent(20, 0));
         playerCharacter.components.add(new AnimationComponent("character_walk"));
         //playerCharacter.components.add(new ImageComponent("character-idle-shaded.png", new Color(0, 255, 0), new Color(255, 230, 209), true));

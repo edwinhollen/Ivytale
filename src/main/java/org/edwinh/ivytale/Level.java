@@ -5,6 +5,7 @@ import org.edwinh.ivytale.components.PhysicsComponent;
 import org.edwinh.ivytale.components.PositionComponent;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.newdawn.slick.geom.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,11 +46,13 @@ public class Level {
                     levelPieceEntity.components.add(new PositionComponent(levelPieceX, levelPieceY));
                     levelPieceEntity.components.add(new ImageComponent(allPieces.getJSONObject(levelPieceType).getString("image")));
                     levelPieceEntity.components.add(new PhysicsComponent(
-                            allPieces.getJSONObject(levelPieceType).getJSONObject("hitbox").getInt("width"),
-                            allPieces.getJSONObject(levelPieceType).getJSONObject("hitbox").getInt("height"),
+                        new Rectangle(
                             allPieces.getJSONObject(levelPieceType).getJSONObject("hitbox").getInt("x"),
                             allPieces.getJSONObject(levelPieceType).getJSONObject("hitbox").getInt("y"),
-                            true
+                            allPieces.getJSONObject(levelPieceType).getJSONObject("hitbox").getInt("width"),
+                            allPieces.getJSONObject(levelPieceType).getJSONObject("hitbox").getInt("height")
+                        ),
+                        true
                     ));
                     this.entities.add(levelPieceEntity);
                 }
