@@ -27,7 +27,6 @@ public class PlayerControlSystem extends EntitySystem {
 
     @Override
     public void update(ArrayList<Entity> entities, GameContainer gc, double dt) {
-
         for(Entity e : entities){
             PhysicsComponent phys = ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class));
             AnimationComponent anim = ((AnimationComponent) e.getComponentByClass(AnimationComponent.class));
@@ -38,22 +37,19 @@ public class PlayerControlSystem extends EntitySystem {
             if(gc.getInput().isKeyDown(Config.control_jump) && phys.velocityY == 0){
                 lastAction = Action.JUMP;
                 phys.velocityY -= (stats.jumpHeight);
-                /*
-                if(!anim.name.equals("character_stand_left")){
-                    anim.change("character_stand_left");
-                }
-                */
             }
 
             if(gc.getInput().isKeyDown(Config.control_walkRight)) {
                 lastAction = Action.WALK_RIGHT;
                 phys.velocityX = adjustedMoveSpeed;
+                System.out.println(adjustedMoveSpeed);
                 if(!anim.name.equals("character_walk_right")){
                     anim.change("character_walk_right");
                 }
             }else if(gc.getInput().isKeyDown(Config.control_walkLeft)) {
                 lastAction = Action.WALK_LEFT;
                 phys.velocityX = adjustedMoveSpeed * -1;
+                System.out.println(adjustedMoveSpeed * -1);
                 if(!anim.name.equals("character_walk_left")){
                     anim.change("character_walk_left");
                 }

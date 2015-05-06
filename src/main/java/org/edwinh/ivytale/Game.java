@@ -8,17 +8,17 @@ import org.newdawn.slick.*;
  */
 public class Game extends BasicGame {
     private Scene currentScene;
+    private AppGameContainer appgc;
 
     public Game() throws SlickException {
         super(Config.title);
 
-        AppGameContainer appgc = new AppGameContainer(new ScalableGame(this, Config.renderWidth, Config.renderHeight, false));
+        appgc = new AppGameContainer(new ScalableGame(this, Config.renderWidth, Config.renderHeight, false));
         appgc.setDisplayMode(Config.screenWidth, Config.screenHeight, false);
         appgc.setVSync(Config.vsync);
         appgc.setForceExit(false);
         appgc.setShowFPS(Config.show_fps);
         appgc.setUpdateOnlyWhenVisible(false);
-        appgc.setMinimumLogicUpdateInterval(1);
         appgc.start();
     }
 
@@ -39,13 +39,17 @@ public class Game extends BasicGame {
 
     @Override
     public String getTitle() {
-        return String.format("%s (%s)", Config.title, Config.version);
+        return String.format(
+                "%s (%s)",
+                Config.title,
+                Config.version
+        );
     }
 
 
     @Override
     public void update(GameContainer gc, int dt) throws SlickException {
-        System.out.println((double) dt);
+        //System.out.println((double) dt);
         currentScene.update(gc, (double) dt);
     }
 
