@@ -11,12 +11,12 @@
       },
       {
         "type": "grass-single",
-        "x": 100,
+        "x": 50,
         "y": 70
       },
       {
         "type": "grass-single",
-        "x": 200,
+        "x": 100,
         "y": 90
       }
     ]

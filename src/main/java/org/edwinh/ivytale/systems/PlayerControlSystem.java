@@ -7,6 +7,7 @@ import org.edwinh.ivytale.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -28,9 +29,18 @@ public class PlayerControlSystem extends EntitySystem {
         for(Entity e : entities){
             PhysicsComponent phys = ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class));
             AnimationComponent anim = ((AnimationComponent) e.getComponentByClass(AnimationComponent.class));
+            PlayerStatsComponent stats = ((PlayerStatsComponent) e.getComponentByClass(PlayerStatsComponent.class));
 
 
-            double adjustedMoveSpeed = (((PlayerStatsComponent) e.getComponentByClass(PlayerStatsComponent.class)).moveSpeed) / 10;
+            double adjustedMoveSpeed = stats.moveSpeed / 10;
+
+            if(gc.getInput().isKeyDown(Config.control_jump) && phys.velocityY == 0){
+                phys.velocityY -= (stats.jumpHeight / 100) * dt;
+                if(!anim.name.equals("character_stand")){
+                    anim.change("character_stand");
+                }
+            }
+
             if(gc.getInput().isKeyDown(Config.control_walkRight)) {
                 phys.velocityX = adjustedMoveSpeed;
                 if(!anim.name.equals("character_walk")){

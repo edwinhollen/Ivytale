@@ -42,6 +42,7 @@ public class PhysicsSystem extends EntitySystem {
                 (float) Math.round((pos.x + phys.velocityX)),
                 (float) Math.round((pos.y + phys.velocityY))
             );
+            boolean applyGravity = true;
             while(!(current.getX() == destination.getX() && current.getY() == destination.getY())){
                 Point potentialX = new Point(current.getX() + (current.getX() == destination.getX() ? 0 : (current.getX() < destination.getX() ? 1 : -1)), current.getY());
                 Rectangle potentialXRect = new Rectangle(
@@ -92,6 +93,7 @@ public class PhysicsSystem extends EntitySystem {
                         potentialY = current;
                         destination.setY(potentialY.getY());
                         phys.velocityY = 0;
+                        applyGravity = false;
                         break;
                     }
                 }
@@ -102,7 +104,7 @@ public class PhysicsSystem extends EntitySystem {
             pos.x = current.getX();
             pos.y = current.getY();
 
-            phys.velocityY += ((gravity / 100) * dt);
+            if(applyGravity) phys.velocityY += ((gravity / 100) * dt);
         }
     }
 

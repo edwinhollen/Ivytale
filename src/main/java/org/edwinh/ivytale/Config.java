@@ -28,6 +28,7 @@ public class Config {
     public static int control_walkLeft = Input.KEY_LEFT;
     public static int control_walkRight = Input.KEY_RIGHT;
     public static int control_attack = Input.KEY_LCONTROL;
+    public static int control_jump = Input.KEY_LALT;
 
     public Config(){
         load();

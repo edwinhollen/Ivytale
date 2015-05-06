@@ -5,5 +5,6 @@
   "show_fps": false,
   "walk_left": "KEY_LEFT",
   "walk_right": "KEY_RIGHT",
-  "attack": "KEY_LCONTROL"
+  "attack": "KEY_LCONTROL",
+  "jump": "KEY_LALT"
 }
