@@ -33,7 +33,7 @@
     "delay": 120,
     "loop": true,
     "frames": [
-      "character-idle.png"
+      "character-idle-shaded.png"
     ]
   },
   "character_stand_right": {
@@ -44,7 +44,7 @@
     "loop": true,
     "flip_horizontal": true,
     "frames": [
-      "character-idle.png"
+      "character-idle-shaded.png"
     ]
   }
 }
