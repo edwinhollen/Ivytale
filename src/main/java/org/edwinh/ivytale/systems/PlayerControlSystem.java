@@ -43,14 +43,12 @@ public class PlayerControlSystem extends EntitySystem {
             if(gc.getInput().isKeyDown(Config.control_walkRight)) {
                 lastAction = Action.WALK_RIGHT;
                 phys.velocityX = adjustedMoveSpeed;
-                System.out.println(adjustedMoveSpeed);
                 if(!anim.name.equals("character_walk_right")){
                     anim.change("character_walk_right");
                 }
             }else if(gc.getInput().isKeyDown(Config.control_walkLeft)) {
                 lastAction = Action.WALK_LEFT;
                 phys.velocityX = adjustedMoveSpeed * -1;
-                System.out.println(adjustedMoveSpeed * -1);
                 if(!anim.name.equals("character_walk_left")){
                     anim.change("character_walk_left");
                 }
