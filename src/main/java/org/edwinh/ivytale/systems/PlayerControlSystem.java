@@ -7,7 +7,6 @@ import org.edwinh.ivytale.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -27,18 +26,18 @@ public class PlayerControlSystem extends EntitySystem {
     }
 
     @Override
-    public void update(ArrayList<Entity> entities, GameContainer gc, int dt) {
+    public void update(ArrayList<Entity> entities, GameContainer gc, double dt) {
+
         for(Entity e : entities){
             PhysicsComponent phys = ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class));
             AnimationComponent anim = ((AnimationComponent) e.getComponentByClass(AnimationComponent.class));
             PlayerStatsComponent stats = ((PlayerStatsComponent) e.getComponentByClass(PlayerStatsComponent.class));
 
-
-            double adjustedMoveSpeed = stats.moveSpeed / 10;
+            double adjustedMoveSpeed = stats.moveSpeed;
 
             if(gc.getInput().isKeyDown(Config.control_jump) && phys.velocityY == 0){
                 lastAction = Action.JUMP;
-                phys.velocityY -= (stats.jumpHeight / 100) * dt;
+                phys.velocityY -= (stats.jumpHeight);
                 /*
                 if(!anim.name.equals("character_stand_left")){
                     anim.change("character_stand_left");
@@ -61,10 +60,12 @@ public class PlayerControlSystem extends EntitySystem {
             }else{
                 phys.velocityX = 0;
                 if(lastAction == Action.WALK_LEFT){
+                    lastAction = Action.STAND_LEFT;
                     if(!anim.name.equals("character_stand_left")){
                         anim.change("character_stand_left");
                     }
                 }else if(lastAction == Action.WALK_RIGHT){
+                    lastAction = Action.STAND_RIGHT;
                     if(!anim.name.equals("character_stand_right")){
                         anim.change("character_stand_right");
                     }

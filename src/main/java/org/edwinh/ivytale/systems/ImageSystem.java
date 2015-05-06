@@ -23,7 +23,7 @@ public class ImageSystem extends EntitySystem {
 
 
     @Override
-    public void update(ArrayList<Entity> entities, GameContainer gc, int dt) {
+    public void update(ArrayList<Entity> entities, GameContainer gc, double dt) {
 
     }
 

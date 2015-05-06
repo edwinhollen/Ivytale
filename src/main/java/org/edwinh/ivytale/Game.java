@@ -17,6 +17,8 @@ public class Game extends BasicGame {
         appgc.setVSync(Config.vsync);
         appgc.setForceExit(false);
         appgc.setShowFPS(Config.show_fps);
+        appgc.setUpdateOnlyWhenVisible(false);
+        appgc.setMinimumLogicUpdateInterval(1);
         appgc.start();
     }
 
@@ -43,7 +45,8 @@ public class Game extends BasicGame {
 
     @Override
     public void update(GameContainer gc, int dt) throws SlickException {
-        currentScene.update(gc, dt);
+        System.out.println((double) dt);
+        currentScene.update(gc, (double) dt);
     }
 
 }

@@ -64,7 +64,7 @@ public class AnimationSystem extends EntitySystem {
     }
 
     @Override
-    public void update(ArrayList<Entity> entities, GameContainer gc, int dt) {
+    public void update(ArrayList<Entity> entities, GameContainer gc, double dt) {
         for(Entity e : entities){
             long now = Instant.now().toEpochMilli();
             AnimationComponent ac = ((AnimationComponent) e.getComponentByClass(AnimationComponent.class));

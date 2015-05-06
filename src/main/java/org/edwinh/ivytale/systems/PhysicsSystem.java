@@ -6,9 +6,11 @@ import org.edwinh.ivytale.components.PhysicsComponent;
 import org.edwinh.ivytale.components.PositionComponent;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Point;
-import org.newdawn.slick.geom.Rectangle;
 
+import java.awt.*;
+import java.awt.geom.Point2D.Double;
+
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -27,25 +29,28 @@ public class PhysicsSystem extends EntitySystem {
     }
 
     @Override
-    public void update(ArrayList<Entity> entities, GameContainer gc, int dt) {
+    public void update(ArrayList<Entity> entities, GameContainer gc, double dt) {
         for(Entity e : entities){
             PhysicsComponent phys = ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class));
             PositionComponent pos = ((PositionComponent) e.getComponentByClass(PositionComponent.class));
 
             if(phys.fixed) continue;
 
-            Point current = new Point(
-                (float) pos.x,
-                (float) pos.y
+            Point.Double current = new Point.Double(
+                pos.x,
+                pos.y
             );
-            Point destination = new Point(
-                (float) Math.round((pos.x + phys.velocityX)),
-                (float) Math.round((pos.y + phys.velocityY))
+            Point.Double destination = new Point.Double(
+                (double) Math.round((pos.x + (phys.velocityX*dt))),
+                (double) Math.round((pos.y + (phys.velocityY*dt)))
             );
             boolean applyGravity = true;
             while(!(current.getX() == destination.getX() && current.getY() == destination.getY())){
-                Point potentialX = new Point(current.getX() + (current.getX() == destination.getX() ? 0 : (current.getX() < destination.getX() ? 1 : -1)), current.getY());
-                Rectangle potentialXRect = new Rectangle(
+                Point.Double potentialX = new Point.Double(
+                    current.getX() + (current.getX() == destination.getX() ? 0 : (current.getX() < destination.getX() ? 1 : -1)),
+                    current.getY()
+                );
+                Rectangle2D.Double potentialXRect = new Rectangle2D.Double(
                     potentialX.getX()+phys.hitbox.getX(),
                     potentialX.getY()+phys.hitbox.getY(),
                     phys.hitbox.getWidth(),
@@ -56,23 +61,26 @@ public class PhysicsSystem extends EntitySystem {
                     if(otherEntity.id.equals(e.id)) continue;
                     PhysicsComponent otherPhys = ((PhysicsComponent) otherEntity.getComponentByClass(PhysicsComponent.class));
                     PositionComponent otherPos = ((PositionComponent) otherEntity.getComponentByClass(PositionComponent.class));
-                    Rectangle otherRect = new Rectangle(
-                        (float) (otherPos.x+otherPhys.hitbox.getX()),
-                        (float) (otherPos.y+otherPhys.hitbox.getY()),
+                    Rectangle2D.Double otherRect = new Rectangle2D.Double(
+                        (otherPos.x+otherPhys.hitbox.getX()),
+                        (otherPos.y+otherPhys.hitbox.getY()),
                         otherPhys.hitbox.getWidth(),
                         otherPhys.hitbox.getHeight()
                     );
                     if(potentialXRect.intersects(otherRect)){
                         potentialX = current;
-                        destination.setX(potentialX.getX());
+                        destination = new Point.Double(potentialX.getX(), destination.getY());
                         phys.velocityX = 0;
                         break;
                     }
                 }
-                current.setX(potentialX.getX());
+                current = new Point.Double(potentialX.getX(), current.getY());
 
-                Point potentialY = new Point(current.getX(), current.getY() + (current.getY() == destination.getY() ? 0 : (current.getY() < destination.getY() ? 1 : -1)));
-                Rectangle potentialYRect = new Rectangle(
+                Point.Double potentialY = new Point.Double(
+                    current.getX(),
+                    current.getY() + (current.getY() == destination.getY() ? 0 : (current.getY() < destination.getY() ? 1 : -1))
+                );
+                Rectangle2D.Double potentialYRect = new Rectangle2D.Double(
                         potentialY.getX()+phys.hitbox.getX(),
                         potentialY.getY()+phys.hitbox.getY(),
                         phys.hitbox.getWidth(),
@@ -83,7 +91,7 @@ public class PhysicsSystem extends EntitySystem {
                     if(otherEntity.id.equals(e.id)) continue;
                     PhysicsComponent otherPhys = ((PhysicsComponent) otherEntity.getComponentByClass(PhysicsComponent.class));
                     PositionComponent otherPos = ((PositionComponent) otherEntity.getComponentByClass(PositionComponent.class));
-                    Rectangle otherRect = new Rectangle(
+                    Rectangle2D.Double otherRect = new Rectangle2D.Double(
                             (float) (otherPos.x+otherPhys.hitbox.getX()),
                             (float) (otherPos.y+otherPhys.hitbox.getY()),
                             otherPhys.hitbox.getWidth(),
@@ -91,14 +99,13 @@ public class PhysicsSystem extends EntitySystem {
                     );
                     if(potentialYRect.intersects(otherRect)){
                         potentialY = current;
-                        destination.setY(potentialY.getY());
+                        destination = new Point.Double(destination.getX(), potentialY.getY());
                         phys.velocityY = 0;
                         applyGravity = false;
                         break;
                     }
                 }
-                current.setX(potentialX.getX());
-                current.setY(potentialY.getY());
+                current = new Point.Double(potentialX.getX(), potentialY.getY());
             }
 
             pos.x = current.getX();

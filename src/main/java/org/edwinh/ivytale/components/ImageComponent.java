@@ -34,7 +34,6 @@ public class ImageComponent extends Component {
     public ImageComponent(String image, int offsetX, int offsetY, Color keyColor, Color fillColor, boolean respectShading){
         this(image, offsetX, offsetY);
         // recolor
-
         for(int x = 0; x < this.image.getWidth(); x++){
             for(int y = 0; y < this.image.getHeight(); y++){
                 Color pixel = this.image.getColor(x, y);

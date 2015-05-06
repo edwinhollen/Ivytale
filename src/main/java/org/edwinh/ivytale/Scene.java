@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public abstract class Scene {
     public ArrayList<EntitySystem> systems = new ArrayList<>();
     public ArrayList<Entity> entities = new ArrayList<>();
-    public void update(GameContainer gc, int dt){
+    public void update(GameContainer gc, double dt){
         for(EntitySystem s : systems){
             ArrayList<Entity> relevantEntities = entities.stream().filter(e -> e.getComponentsAsClasses().containsAll(s.acceptedComponents)).collect(Collectors.toCollection(ArrayList::new));
             s.update(relevantEntities, gc, dt);

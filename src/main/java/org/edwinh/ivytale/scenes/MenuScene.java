@@ -9,7 +9,7 @@ import org.newdawn.slick.Graphics;
  */
 public class MenuScene extends Scene {
     @Override
-    public void update(GameContainer gc, int dt) {
+    public void update(GameContainer gc, double dt) {
 
     }
 

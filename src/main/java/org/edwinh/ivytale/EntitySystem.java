@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  */
 public abstract class EntitySystem {
-    public abstract void update(ArrayList<Entity> entities, GameContainer gc, int dt);
+    public abstract void update(ArrayList<Entity> entities, GameContainer gc, double dt);
     public abstract void render(ArrayList<Entity> entities, GameContainer gc, Graphics g);
     public ArrayList<Class> acceptedComponents = new ArrayList<>();
 }
