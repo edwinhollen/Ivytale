@@ -19,6 +19,7 @@ public class Game extends BasicGame {
         appgc.setForceExit(false);
         appgc.setShowFPS(Config.show_fps);
         appgc.setUpdateOnlyWhenVisible(false);
+        appgc.setMinimumLogicUpdateInterval(8);
         appgc.start();
     }
 

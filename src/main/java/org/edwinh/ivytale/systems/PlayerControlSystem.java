@@ -32,11 +32,12 @@ public class PlayerControlSystem extends EntitySystem {
             AnimationComponent anim = ((AnimationComponent) e.getComponentByClass(AnimationComponent.class));
             PlayerStatsComponent stats = ((PlayerStatsComponent) e.getComponentByClass(PlayerStatsComponent.class));
 
-            double adjustedMoveSpeed = stats.moveSpeed;
+            double adjustedMoveSpeed = stats.moveSpeed * 0.085f;
+            double adjustedJumpHeight = stats.jumpHeight * 0.15f;
 
             if(gc.getInput().isKeyDown(Config.control_jump) && phys.velocityY == 0){
                 lastAction = Action.JUMP;
-                phys.velocityY -= (stats.jumpHeight);
+                phys.velocityY -= (adjustedJumpHeight);
             }
 
             if(gc.getInput().isKeyDown(Config.control_walkRight)) {

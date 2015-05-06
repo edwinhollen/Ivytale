@@ -113,7 +113,7 @@ public class PhysicsSystem extends EntitySystem {
                 pos.x = current.getX();
                 pos.y = current.getY();
 
-                if(applyGravity) phys.velocityY += gravity;
+                if(applyGravity) phys.velocityY += (gravity * dt * 0.0005f);
             }
         //}
     }
