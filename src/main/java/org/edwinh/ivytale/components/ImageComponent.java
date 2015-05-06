@@ -12,6 +12,8 @@ public class ImageComponent extends Component {
     public Image image;
     public int offsetX = 0;
     public int offsetY = 0;
+    public boolean flipHorizontal = false;
+    public boolean flipVertical = false;
 
     public ImageComponent(String image, int offsetX, int offsetY) {
         try {
@@ -85,5 +87,9 @@ public class ImageComponent extends Component {
 
     public ImageComponent(String image, Color keyColor, Color fillColor){
         this(image, 0, 0, keyColor, fillColor, false);
+    }
+
+    public Image getImage(){
+        return this.image.getFlippedCopy(flipHorizontal, flipVertical);
     }
 }

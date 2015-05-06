@@ -20,7 +20,7 @@ public class GameScene extends Scene {
         playerCharacter.components.add(new PlayerControlComponent());
         playerCharacter.components.add(new PhysicsComponent(new Rectangle(0, 0, 22, 37)));
         playerCharacter.components.add(new PositionComponent(20, 0));
-        playerCharacter.components.add(new AnimationComponent("character_walk"));
+        playerCharacter.components.add(new AnimationComponent("character_walk_left"));
         //playerCharacter.components.add(new ImageComponent("character-idle-shaded.png", new Color(0, 255, 0), new Color(255, 230, 209), true));
 
         this.entities.add(playerCharacter);

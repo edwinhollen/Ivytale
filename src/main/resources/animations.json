@@ -1,5 +1,5 @@
 {
-  "character_walk": {
+  "character_walk_left": {
     "keyColor": [0, 255, 0],
     "fillColor": [255, 229, 204],
     "shading": true,
@@ -12,12 +12,37 @@
       "character-walk4.png"
     ]
   },
-  "character_stand": {
+  "character_walk_right": {
     "keyColor": [0, 255, 0],
     "fillColor": [255, 229, 204],
     "shading": true,
     "delay": 120,
     "loop": true,
+    "flip_horizontal": true,
+    "frames": [
+      "character-walk1.png",
+      "character-walk2.png",
+      "character-walk3.png",
+      "character-walk4.png"
+    ]
+  },
+  "character_stand_left": {
+    "keyColor": [0, 255, 0],
+    "fillColor": [255, 229, 204],
+    "shading": true,
+    "delay": 120,
+    "loop": true,
+    "frames": [
+      "character-idle.png"
+    ]
+  },
+  "character_stand_right": {
+    "keyColor": [0, 255, 0],
+    "fillColor": [255, 229, 204],
+    "shading": true,
+    "delay": 120,
+    "loop": true,
+    "flip_horizontal": true,
     "frames": [
       "character-idle.png"
     ]

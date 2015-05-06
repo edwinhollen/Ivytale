@@ -15,6 +15,8 @@ import java.util.Arrays;
  * Created by Fubar on 4/20/2015.
  */
 public class PlayerControlSystem extends EntitySystem {
+    public Action lastAction = Action.STAND_LEFT;
+
     public PlayerControlSystem(){
         this.acceptedComponents.addAll(Arrays.asList(
             PlayerControlComponent.class,
@@ -35,27 +37,39 @@ public class PlayerControlSystem extends EntitySystem {
             double adjustedMoveSpeed = stats.moveSpeed / 10;
 
             if(gc.getInput().isKeyDown(Config.control_jump) && phys.velocityY == 0){
+                lastAction = Action.JUMP;
                 phys.velocityY -= (stats.jumpHeight / 100) * dt;
-                if(!anim.name.equals("character_stand")){
-                    anim.change("character_stand");
+                /*
+                if(!anim.name.equals("character_stand_left")){
+                    anim.change("character_stand_left");
                 }
+                */
             }
 
             if(gc.getInput().isKeyDown(Config.control_walkRight)) {
+                lastAction = Action.WALK_RIGHT;
                 phys.velocityX = adjustedMoveSpeed;
-                if(!anim.name.equals("character_walk")){
-                    anim.change("character_walk");
+                if(!anim.name.equals("character_walk_right")){
+                    anim.change("character_walk_right");
                 }
             }else if(gc.getInput().isKeyDown(Config.control_walkLeft)) {
+                lastAction = Action.WALK_LEFT;
                 phys.velocityX = adjustedMoveSpeed * -1;
-                if(!anim.name.equals("character_walk")){
-                    anim.change("character_walk");
+                if(!anim.name.equals("character_walk_left")){
+                    anim.change("character_walk_left");
                 }
             }else{
                 phys.velocityX = 0;
-                if(!anim.name.equals("character_stand")){
-                    anim.change("character_stand");
+                if(lastAction == Action.WALK_LEFT){
+                    if(!anim.name.equals("character_stand_left")){
+                        anim.change("character_stand_left");
+                    }
+                }else if(lastAction == Action.WALK_RIGHT){
+                    if(!anim.name.equals("character_stand_right")){
+                        anim.change("character_stand_right");
+                    }
                 }
+
             }
         }
     }
@@ -68,6 +82,9 @@ public class PlayerControlSystem extends EntitySystem {
     public enum Action{
         WALK_LEFT,
         WALK_RIGHT,
-        ATTACK
+        ATTACK,
+        STAND_LEFT,
+        STAND_RIGHT,
+        JUMP
     }
 }

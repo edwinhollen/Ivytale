@@ -50,9 +50,11 @@ public class AnimationSystem extends EntitySystem {
                     }catch(JSONException e){
                         ic = new ImageComponent(animationObject.getJSONArray("frames").getString(i));
                     }
+                    ic.flipHorizontal = animationObject.optBoolean("flip_horizontal", false);
+                    ic.flipVertical = animationObject.optBoolean("flip_vertical", false);
                     frames.add(ic);
                 }
-                this.animations.put(name, new Animation(frames, animationObject.getInt("delay"), animationObject.optBoolean("delay", true)));
+                this.animations.put(name, new Animation(frames, animationObject.getInt("delay"), animationObject.optBoolean("loop", true)));
             }catch(JSONException e){
                 e.printStackTrace();
                 System.out.println("Couldn't add animation");
@@ -84,7 +86,7 @@ public class AnimationSystem extends EntitySystem {
             AnimationComponent ac = ((AnimationComponent) e.getComponentByClass(AnimationComponent.class));
             Animation a = this.animations.get(ac.name);
 
-            g.drawImage(a.frames.get(ac.currentFrame).image, (float) pc.x, (float) pc.y);
+            g.drawImage(a.frames.get(ac.currentFrame).getImage(), (float) pc.x, (float) pc.y);
         }
     }
 
