@@ -7,14 +7,5 @@
       "width": 35,
       "height": 11
     }
-  },
-  "grass-double": {
-    "image": "grass-double.png",
-    "hitbox": {
-      "x": 6,
-      "y": 5,
-      "width": 80,
-      "height": 11
-    }
   }
 }
