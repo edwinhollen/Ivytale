@@ -52,13 +52,10 @@ public class ImageComponent extends Component {
                     int adjGreen = 0;
                     int adjBlue = 0;
                     if(keyColor.getGreen() > 0 && pixel.getGreen() > 0){
-                        System.out.println("keying for green");
                         adjGreen = 255 - pixel.getGreen();
                     }else if(keyColor.getRed() > 0 && pixel.getRed() > 0){
-                        System.out.println("keying for red");
                         adjRed = 255 - pixel.getRed();
                     }else if(keyColor.getBlue() > 0 && pixel.getBlue() > 0){
-                        System.out.println("keying for blue");
                         adjBlue = 255 - pixel.getRed();
                     }
                     newFillColor = new Color(fillColor.getRed() - adjRed, fillColor.getGreen() - adjGreen, fillColor.getBlue() - adjBlue);
