@@ -28,7 +28,9 @@ public class Level {
                 if(!thisLevel.optString("background", "").isEmpty()){
                     Entity backgroundEntity = new Entity();
                     backgroundEntity.components.add(new PositionComponent(0, 0));
-                    backgroundEntity.components.add(new ImageComponent(thisLevel.getString("background")));
+                    ImageComponent backgroundImageComponent = new ImageComponent(thisLevel.getString("background"));
+                    backgroundImageComponent.locked = true;
+                    backgroundEntity.components.add(backgroundImageComponent);
                     this.entities.add(backgroundEntity);
                 }
 

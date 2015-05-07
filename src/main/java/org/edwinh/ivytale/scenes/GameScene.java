@@ -32,6 +32,7 @@ public class GameScene extends Scene {
         this.systems.add(new PhysicsSystem(level.gravity));
         this.systems.add(new PlayerControlSystem());
         this.systems.add(new AnimationSystem());
+        this.systems.add(new CameraSystem());
     }
     @Override
     public void update(GameContainer gc, double dt) {

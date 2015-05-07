@@ -30,10 +30,12 @@ public class ImageSystem extends EntitySystem {
     @Override
     public void render(ArrayList<Entity> entities, GameContainer gc, Graphics g) {
         for(Entity e : entities){
+            PositionComponent pos = (PositionComponent) e.getComponentByClass(PositionComponent.class);
+            ImageComponent img = (ImageComponent) e.getComponentByClass(ImageComponent.class);
             g.drawImage(
-                    ((ImageComponent) e.getComponentByClass(ImageComponent.class)).image,
-                    (int) ((PositionComponent) e.getComponentByClass(PositionComponent.class)).x,
-                    (int) ((PositionComponent) e.getComponentByClass(PositionComponent.class)).y
+                img.image,
+                (float) (img.locked ? 0 : CameraSystem.x + pos.x),
+                (float) (img.locked ? 0 : CameraSystem.y + pos.y)
             );
         }
     }

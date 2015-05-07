@@ -14,6 +14,7 @@ public class ImageComponent extends Component {
     public int offsetY = 0;
     public boolean flipHorizontal = false;
     public boolean flipVertical = false;
+    public boolean locked = false;
 
     public ImageComponent(String image, int offsetX, int offsetY) {
         try {

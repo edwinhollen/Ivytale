@@ -86,7 +86,11 @@ public class AnimationSystem extends EntitySystem {
             AnimationComponent ac = ((AnimationComponent) e.getComponentByClass(AnimationComponent.class));
             Animation a = this.animations.get(ac.name);
 
-            g.drawImage(a.frames.get(ac.currentFrame).getImage(), (float) pc.x, (float) pc.y);
+            g.drawImage(
+                a.frames.get(ac.currentFrame).getImage(),
+                (float) (CameraSystem.x + pc.x),
+                (float) (CameraSystem.y + pc.y)
+            );
         }
     }
 
