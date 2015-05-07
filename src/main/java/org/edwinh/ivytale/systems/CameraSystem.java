@@ -19,7 +19,7 @@ public class CameraSystem extends EntitySystem{
     private static double fy = 0;
     public static double x = fx;
     public static double y = fy;
-    public static double speed = 0.85f;
+    public static double speed = 0.015f;
 
     public CameraSystem(){
         this.acceptedComponents.addAll(Arrays.asList(
@@ -33,11 +33,15 @@ public class CameraSystem extends EntitySystem{
         for(Entity e : entities){
             PositionComponent pos = (PositionComponent) e.getComponentByClass(PositionComponent.class);
 
+            int sourceX = (int) Math.round(fx);
+            int sourceY = (int) Math.round(fy);
             int targetX = (int) Math.round(-pos.x+Config.renderWidth/2);
             int targetY = (int) Math.round(-pos.y+Config.renderHeight/2);
 
-            fx += (Math.round(fx) == targetX) ? 0 : (Math.round(fx) < targetX) ? speed: -speed;
-            fy += (Math.round(fy) == targetY) ? 0 : (Math.round(fy) < targetY) ? speed : -speed;
+            double distance = Math.sqrt(Math.pow((targetX-sourceX),2)+Math.pow(targetY-sourceY, 2));
+
+            fx += (Math.round(fx) == targetX) ? 0 : (Math.round(fx) < targetX) ? speed*distance: -speed*distance;
+            fy += (Math.round(fy) == targetY) ? 0 : (Math.round(fy) < targetY) ? speed*distance : -speed*distance;
 
             x = Math.round(fx);
             y = Math.round(fy);
