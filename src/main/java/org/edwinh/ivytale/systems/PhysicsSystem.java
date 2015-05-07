@@ -18,6 +18,7 @@ import java.util.Arrays;
  */
 public class PhysicsSystem extends EntitySystem {
     public double gravity = 1.0;
+    public double precision = 100;
 
     public PhysicsSystem(double gravity){
         this.gravity = gravity;
@@ -29,93 +30,90 @@ public class PhysicsSystem extends EntitySystem {
 
     @Override
     public void update(ArrayList<Entity> entities, GameContainer gc, double dt) {
-        //for(int i = 0; i < dt; i++){
-        dt = dt * 1.5f;
-            for(Entity e : entities){
-                PhysicsComponent phys = ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class));
-                PositionComponent pos = ((PositionComponent) e.getComponentByClass(PositionComponent.class));
+        for(Entity e : entities){
+            PhysicsComponent phys = ((PhysicsComponent) e.getComponentByClass(PhysicsComponent.class));
+            PositionComponent pos = ((PositionComponent) e.getComponentByClass(PositionComponent.class));
 
-                if(phys.fixed) continue;
+            if(phys.fixed) continue;
 
-                Point.Double current = new Point.Double(
-                        Math.round(pos.x),
-                        Math.round(pos.y)
+            Point.Double current = new Point.Double(
+                    Math.round(pos.x * precision),
+                    Math.round(pos.y * precision)
+            );
+            Point.Double destination = new Point.Double(
+                    Math.round(current.getX() + (phys.velocityX * precision * dt)),
+                    Math.round(current.getY() + (phys.velocityY * precision * dt))
+            );
+
+            boolean applyGravity = true;
+            while(!(current.getX() == destination.getX() && current.getY() == destination.getY())){
+                Point.Double potentialX = new Point.Double(
+                        current.getX() + (current.getX() == destination.getX() ? 0 : (current.getX() < destination.getX() ? 1 : -1)),
+                        current.getY()
                 );
-                Point.Double destination = new Point.Double(
-                        Math.round(current.getX() + (phys.velocityX * dt)),
-                        Math.round(current.getY() + (phys.velocityY * dt))
+                Rectangle2D.Double potentialXRect = new Rectangle2D.Double(
+                        potentialX.getX()+phys.hitbox.getX()*precision,
+                        potentialX.getY()+phys.hitbox.getY()*precision,
+                        phys.hitbox.getWidth()*precision,
+                        phys.hitbox.getHeight()*precision
                 );
-
-                boolean applyGravity = true;
-                while(!(current.getX() == destination.getX() && current.getY() == destination.getY())){
-                    Point.Double potentialX = new Point.Double(
-                            current.getX() + (current.getX() == destination.getX() ? 0 : (current.getX() < destination.getX() ? 1 : -1)),
-                            current.getY()
+                // check for collisions with new x
+                for(Entity otherEntity : entities){
+                    if(otherEntity.id.equals(e.id)) continue;
+                    PhysicsComponent otherPhys = ((PhysicsComponent) otherEntity.getComponentByClass(PhysicsComponent.class));
+                    PositionComponent otherPos = ((PositionComponent) otherEntity.getComponentByClass(PositionComponent.class));
+                    Rectangle2D.Double otherRect = new Rectangle2D.Double(
+                            otherPos.x*precision+otherPhys.hitbox.getX()*precision,
+                            otherPos.y*precision+otherPhys.hitbox.getY()*precision,
+                            otherPhys.hitbox.getWidth()*precision,
+                            otherPhys.hitbox.getHeight()*precision
                     );
-                    Rectangle2D.Double potentialXRect = new Rectangle2D.Double(
-                            potentialX.getX()+phys.hitbox.getX(),
-                            potentialX.getY()+phys.hitbox.getY(),
-                            phys.hitbox.getWidth(),
-                            phys.hitbox.getHeight()
-                    );
-                    // check for collisions with new x
-                    for(Entity otherEntity : entities){
-                        if(otherEntity.id.equals(e.id)) continue;
-                        PhysicsComponent otherPhys = ((PhysicsComponent) otherEntity.getComponentByClass(PhysicsComponent.class));
-                        PositionComponent otherPos = ((PositionComponent) otherEntity.getComponentByClass(PositionComponent.class));
-                        Rectangle2D.Double otherRect = new Rectangle2D.Double(
-                                otherPos.x+otherPhys.hitbox.getX(),
-                                otherPos.y+otherPhys.hitbox.getY(),
-                                otherPhys.hitbox.getWidth(),
-                                otherPhys.hitbox.getHeight()
-                        );
-                        if(potentialXRect.intersects(otherRect)){
-                            potentialX = current;
-                            destination = new Point.Double(potentialX.getX(), destination.getY());
-                            phys.velocityX = 0;
-                            break;
-                        }
+                    if(potentialXRect.intersects(otherRect)){
+                        potentialX = current;
+                        destination = new Point.Double(potentialX.getX(), destination.getY());
+                        phys.velocityX = 0;
+                        break;
                     }
-                    current = new Point.Double(potentialX.getX(), current.getY());
-
-                    Point.Double potentialY = new Point.Double(
-                            current.getX(),
-                            current.getY() + (current.getY() == destination.getY() ? 0 : (current.getY() < destination.getY() ? 1 : -1))
-                    );
-                    Rectangle2D.Double potentialYRect = new Rectangle2D.Double(
-                            potentialY.getX()+phys.hitbox.getX(),
-                            potentialY.getY()+phys.hitbox.getY(),
-                            phys.hitbox.getWidth(),
-                            phys.hitbox.getHeight()
-                    );
-                    // check for collisions with new y
-                    for(Entity otherEntity : entities){
-                        if(otherEntity.id.equals(e.id)) continue;
-                        PhysicsComponent otherPhys = ((PhysicsComponent) otherEntity.getComponentByClass(PhysicsComponent.class));
-                        PositionComponent otherPos = ((PositionComponent) otherEntity.getComponentByClass(PositionComponent.class));
-                        Rectangle2D.Double otherRect = new Rectangle2D.Double(
-                                otherPos.x+otherPhys.hitbox.getX(),
-                                otherPos.y+otherPhys.hitbox.getY(),
-                                otherPhys.hitbox.getWidth(),
-                                otherPhys.hitbox.getHeight()
-                        );
-                        if(potentialYRect.intersects(otherRect)){
-                            potentialY = current;
-                            destination = new Point.Double(destination.getX(), potentialY.getY());
-                            phys.velocityY = 0;
-                            applyGravity = false;
-                            break;
-                        }
-                    }
-                    current = new Point.Double(potentialX.getX(), potentialY.getY());
                 }
+                current = new Point.Double(potentialX.getX(), current.getY());
 
-                pos.x = current.getX();
-                pos.y = current.getY();
-
-                if(applyGravity) phys.velocityY += (gravity * dt * 0.0005f);
+                Point.Double potentialY = new Point.Double(
+                        current.getX(),
+                        current.getY() + (current.getY() == destination.getY() ? 0 : (current.getY() < destination.getY() ? 1 : -1))
+                );
+                Rectangle2D.Double potentialYRect = new Rectangle2D.Double(
+                        potentialY.getX()+phys.hitbox.getX()*precision,
+                        potentialY.getY()+phys.hitbox.getY()*precision,
+                        phys.hitbox.getWidth()*precision,
+                        phys.hitbox.getHeight()*precision
+                );
+                // check for collisions with new y
+                for(Entity otherEntity : entities){
+                    if(otherEntity.id.equals(e.id)) continue;
+                    PhysicsComponent otherPhys = ((PhysicsComponent) otherEntity.getComponentByClass(PhysicsComponent.class));
+                    PositionComponent otherPos = ((PositionComponent) otherEntity.getComponentByClass(PositionComponent.class));
+                    Rectangle2D.Double otherRect = new Rectangle2D.Double(
+                            otherPos.x*precision+otherPhys.hitbox.getX()*precision,
+                            otherPos.y*precision+otherPhys.hitbox.getY()*precision,
+                            otherPhys.hitbox.getWidth()*precision,
+                            otherPhys.hitbox.getHeight()*precision
+                    );
+                    if(potentialYRect.intersects(otherRect)){
+                        potentialY = current;
+                        destination = new Point.Double(destination.getX(), potentialY.getY());
+                        phys.velocityY = 0;
+                        applyGravity = false;
+                        break;
+                    }
+                }
+                current = new Point.Double(potentialX.getX(), potentialY.getY());
             }
-        //}
+
+            pos.x = current.getX() / precision;
+            pos.y = current.getY() / precision;
+
+            if(applyGravity) phys.velocityY += (gravity * dt * 0.0005f);
+        }
     }
 
     @Override
