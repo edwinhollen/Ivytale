@@ -46,5 +46,27 @@
     "frames": [
       "character-idle-shaded.png"
     ]
+  },
+  "character_jump_left": {
+    "keyColor": [0, 255, 0],
+    "fillColor": [255, 229, 204],
+    "shading": true,
+    "delay": 120,
+    "loop": true,
+    "flip_horizontal": false,
+    "frames": [
+      "character-jump-shaded.png"
+    ]
+  },
+  "character_jump_right": {
+    "keyColor": [0, 255, 0],
+    "fillColor": [255, 229, 204],
+    "shading": true,
+    "delay": 120,
+    "loop": true,
+    "flip_horizontal": true,
+    "frames": [
+      "character-jump-shaded.png"
+    ]
   }
 }

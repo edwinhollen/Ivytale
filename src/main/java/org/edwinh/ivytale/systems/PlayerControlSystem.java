@@ -36,7 +36,6 @@ public class PlayerControlSystem extends EntitySystem {
             double adjustedJumpHeight = stats.jumpHeight * 0.15f;
 
             if(gc.getInput().isKeyDown(Config.control_jump) && phys.velocityY == 0){
-                lastAction = Action.JUMP;
                 phys.velocityY -= (adjustedJumpHeight);
             }
 
@@ -81,6 +80,7 @@ public class PlayerControlSystem extends EntitySystem {
         ATTACK,
         STAND_LEFT,
         STAND_RIGHT,
-        JUMP
+        JUMP_LEFT,
+        JUMP_RIGHT
     }
 }
