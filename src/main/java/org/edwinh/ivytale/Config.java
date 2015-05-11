@@ -24,7 +24,7 @@ public class Config {
     public static int screenWidth = 800;
     public static int screenHeight = 600;
     public static boolean vsync = true;
-    public static boolean show_fps = false;
+    public static boolean show_fps = true;
     public static int control_walkLeft = Input.KEY_LEFT;
     public static int control_walkRight = Input.KEY_RIGHT;
     public static int control_attack = Input.KEY_LCONTROL;
@@ -37,7 +37,6 @@ public class Config {
     public static void load(){
         File f = new File(CONFIG_FILE_LOCATION);
         if(!f.exists()){
-            // see if ~/.ivytale/ exists
             if(!new File(System.getProperty("user.home")+"/.ivytale/").exists()){
                 try {
                     Files.createDirectory(new File(System.getProperty("user.home")+"/.ivytale/").toPath());
@@ -56,6 +55,24 @@ public class Config {
             }
         }
         parse(f);
+    }
+
+    public static void load(boolean clean){
+        if(clean){
+            File f = new File(CONFIG_FILE_LOCATION);
+            if(f.exists()){
+                try{
+                    if(f.delete()){
+                        System.out.println("Successfully cleaned up old config");
+                    }else{
+                        System.out.println("Failed to clean up old config");
+                    }
+                }catch(SecurityException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        load();
     }
 
     public static void parse(File f){

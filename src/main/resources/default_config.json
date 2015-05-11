@@ -2,7 +2,7 @@
   "width": 800,
   "height": 600,
   "vsync": true,
-  "show_fps": false,
+  "show_fps": true,
   "smooth_camera": true,
   "controls": {
     "walk_left": "KEY_LEFT",

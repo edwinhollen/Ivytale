@@ -31,6 +31,9 @@ public class Game extends BasicGame {
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
         currentScene.render(gc, g);
+        if(Config.show_fps){
+            g.drawString(String.format("%s fps", gc.getFPS()), 20, 20);
+        }
     }
 
     @Override
