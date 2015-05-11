@@ -65,9 +65,9 @@ public class Config {
             screenHeight = configObject.getInt("height");
             vsync = configObject.getBoolean("vsync");
             show_fps = configObject.getBoolean("show_fps");
-            control_attack = getKeyCode(configObject.getString("attack"));
-            control_walkLeft = getKeyCode(configObject.getString("walk_left"));
-            control_walkRight = getKeyCode(configObject.getString("walk_right"));
+            control_attack = getKeyCode(configObject.getJSONObject("controls").getString("attack"));
+            control_walkLeft = getKeyCode(configObject.getJSONObject("controls").getString("walk_left"));
+            control_walkRight = getKeyCode(configObject.getJSONObject("controls").getString("walk_right"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
