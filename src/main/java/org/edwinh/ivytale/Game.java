@@ -2,6 +2,13 @@ package org.edwinh.ivytale;
 
 import org.edwinh.ivytale.scenes.GameScene;
 import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.util.ResourceLoader;
+
+import java.awt.*;
+import java.awt.Font;
+import java.io.IOException;
 
 /**
  * A game using Slick2d
@@ -9,6 +16,8 @@ import org.newdawn.slick.*;
 public class Game extends BasicGame {
     private Scene currentScene;
     private AppGameContainer appgc;
+
+    private TrueTypeFont font_regular;
 
     public Game() throws SlickException {
         super(Config.TITLE);
@@ -26,6 +35,12 @@ public class Game extends BasicGame {
 
     @Override
     public void init(GameContainer gc) throws SlickException {
+        // load fonts
+        try {
+            font_regular = new TrueTypeFont(Font.createFont(Font.TRUETYPE_FONT, ResourceLoader.getResourceAsStream("OpenSans-Regular.ttf")).deriveFont(12f), false);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
         currentScene = new GameScene();
     }
 
@@ -33,10 +48,8 @@ public class Game extends BasicGame {
 
         currentScene.render(gc, g);
         if(Config.active.showFPS){
-            g.setColor(Color.black);
-            g.drawString(String.format("%s fps", gc.getFPS()), 20, 21);
-            g.setColor(Color.white);
-            g.drawString(String.format("%s fps", gc.getFPS()), 20, 20);
+            font_regular.drawString(20, 21, String.format("%s fps", gc.getFPS()), Color.black);
+            font_regular.drawString(20, 20, String.format("%s fps", gc.getFPS()), Color.white);
         }
     }
 
