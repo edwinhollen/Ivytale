@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.util.ResourceLoader;
 
 import java.time.Instant;
 import java.util.*;
@@ -27,7 +28,7 @@ public class AnimationSystem extends EntitySystem {
             PositionComponent.class
         ));
         // load all animations
-        JSONObject animationsJson = new JSONObject(new Scanner(ClassLoader.class.getResourceAsStream("/animations.json"), "UTF-8").useDelimiter("\\A").next());
+        JSONObject animationsJson = new JSONObject(new Scanner(ResourceLoader.getResourceAsStream("animations.json"), "UTF-8").useDelimiter("\\A").next());
         for(Iterator<String> iterator = animationsJson.keys(); iterator.hasNext();){
             try {
                 String name = iterator.next();

@@ -23,16 +23,18 @@ public class GameScene extends Scene {
         playerCharacter.components.add(new AnimationComponent("character_stand_left"));
         //playerCharacter.components.add(new ImageComponent("character-idle-shaded.png", new Color(0, 255, 0), new Color(255, 230, 209), true));
 
-        this.entities.add(playerCharacter);
-
         Level level = new Level("test");
         this.entities.addAll(level.entities);
 
-        this.systems.add(new ImageSystem());
+        this.entities.add(playerCharacter);
+
         this.systems.add(new PhysicsSystem(level.gravity));
         this.systems.add(new PlayerControlSystem());
-        this.systems.add(new AnimationSystem());
         this.systems.add(new CameraSystem());
+        this.systems.add(new UserInterfaceSystem());
+        this.systems.add(new AnimationSystem());
+        this.systems.add(new ImageSystem());
+
     }
     @Override
     public void update(GameContainer gc, double dt) {

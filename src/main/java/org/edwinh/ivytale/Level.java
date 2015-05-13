@@ -6,6 +6,7 @@ import org.edwinh.ivytale.components.PositionComponent;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.util.ResourceLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +20,8 @@ public class Level {
     public double gravity = 1.0;
 
     public Level(String levelName){
-        JSONArray allLevels = new JSONArray(new Scanner(ClassLoader.class.getResourceAsStream("/levels.json"), "UTF-8").useDelimiter("\\A").next());
-        JSONObject allPieces = new JSONObject(new Scanner(ClassLoader.class.getResourceAsStream("/levelpieces.json"), "UTF-8").useDelimiter("\\A").next());
+        JSONArray allLevels = new JSONArray(new Scanner(ResourceLoader.getResourceAsStream("levels.json"), "UTF-8").useDelimiter("\\A").next());
+        JSONObject allPieces = new JSONObject(new Scanner(ResourceLoader.getResourceAsStream("levelpieces.json"), "UTF-8").useDelimiter("\\A").next());
         for(int i = 0; i < allLevels.length(); i++){
             JSONObject thisLevel = (JSONObject) allLevels.get(i);
             if(thisLevel.getString("name").equals(levelName)){

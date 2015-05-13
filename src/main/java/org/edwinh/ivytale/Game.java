@@ -22,7 +22,7 @@ public class Game extends BasicGame {
     public Game() throws SlickException {
         super(Config.TITLE);
 
-        appgc = new AppGameContainer(new ScalableGame(this, Config.RENDER_WIDTH, Config.RENDER_HEIGHT, true));
+        appgc = new AppGameContainer(this);
         appgc.setDisplayMode(Config.active.resolutionX, Config.active.resolutionY, false);
         appgc.setVSync(Config.active.vsync);
         appgc.setForceExit(false);
