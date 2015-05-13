@@ -1,101 +1,69 @@
 package org.edwinh.ivytale;
 
-import org.json.JSONObject;
-import org.newdawn.slick.Input;
+import com.google.gson.Gson;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.util.Scanner;
+import java.io.*;
 
 /**
- * Created by Fubar on 4/20/2015.
+ * Created by fubar on 5/12/15.
  */
 public class Config {
-    public static final String title = "Ivytale";
-    public static final String version = "0.1";
+    public static final int RENDER_WIDTH = 400;
+    public static final int RENDER_HEIGHT = 300;
+    public static final String TITLE = "Ivytale";
+    public static final String VERSION = "0.0";
+    public static Settings active;
 
-    public static final String CONFIG_FILE_LOCATION = System.getProperty("user.home")+"/.ivytale/config.json";
-
-    public static final int renderWidth = 400;
-    public static final int renderHeight = 300;
-    public static int screenWidth = 800;
-    public static int screenHeight = 600;
-    public static boolean vsync = true;
-    public static boolean show_fps = true;
-    public static int control_walkLeft = Input.KEY_LEFT;
-    public static int control_walkRight = Input.KEY_RIGHT;
-    public static int control_attack = Input.KEY_LCONTROL;
-    public static int control_jump = Input.KEY_LALT;
-
-    public Config(){
-        load();
+    public static void clean(){
+        File f = getConfigFile();
+        if(f.exists()){
+            try{
+                boolean deleted = f.delete();
+                if (deleted) System.out.println("Cleaned up config file");
+                if (!deleted) System.out.print("Failed to clean up user config file... ");
+            }catch(SecurityException e){
+                System.out.print("is it read-only?");
+            }
+        }else{
+            System.out.println("User config file not found, continuing...");
+        }
+        System.out.println();
     }
-
     public static void load(){
-        File f = new File(CONFIG_FILE_LOCATION);
-        if(!f.exists()){
-            if(!new File(System.getProperty("user.home")+"/.ivytale/").exists()){
-                try {
-                    Files.createDirectory(new File(System.getProperty("user.home")+"/.ivytale/").toPath());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            // copy the default config
-            File defaultConfig = new File(ClassLoader.class.getResource("/default_config.json").getFile());
-            System.out.println(defaultConfig.getAbsolutePath());
-            try {
-                System.out.println("Copying default config file...");
-                Files.copy(defaultConfig.toPath(), new File(CONFIG_FILE_LOCATION).toPath(), StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        parse(f);
-    }
+        File f = getConfigFile();
+        if(!f.exists()) makeNewConfigFile();
 
-    public static void load(boolean clean){
-        if(clean){
-            File f = new File(CONFIG_FILE_LOCATION);
-            if(f.exists()){
-                try{
-                    if(f.delete()){
-                        System.out.println("Successfully cleaned up old config");
-                    }else{
-                        System.out.println("Failed to clean up old config");
-                    }
-                }catch(SecurityException e){
-                    e.printStackTrace();
-                }
-            }
-        }
-        load();
-    }
-
-    public static void parse(File f){
+        // read config
         try {
-            JSONObject configObject = new JSONObject(new Scanner(f).useDelimiter("\\A").next());
-            screenWidth = configObject.getInt("width");
-            screenHeight = configObject.getInt("height");
-            vsync = configObject.getBoolean("vsync");
-            show_fps = configObject.getBoolean("show_fps");
-            control_attack = getKeyCode(configObject.getJSONObject("controls").getString("attack"));
-            control_walkLeft = getKeyCode(configObject.getJSONObject("controls").getString("walk_left"));
-            control_walkRight = getKeyCode(configObject.getJSONObject("controls").getString("walk_right"));
+            BufferedReader reader = new BufferedReader(new FileReader(f));
+            active = (new Gson()).fromJson(reader, Settings.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
-
-    public static int getKeyCode(String keyName){
+    public static File getConfigFile(){
+        return new File(System.getProperty("user.home") + "/.ivytale/config.json");
+    }
+    public static void makeNewConfigFile(){
+        System.out.println("Making a fresh new config file...");
         try {
-            return Integer.parseInt(Input.class.getField(keyName.toUpperCase()).get(Input.class).toString());
-        } catch (IllegalAccessException | NoSuchFieldException e) {
+            FileWriter writer = new FileWriter(getConfigFile());
+            writer.write((new Gson()).toJson(new Settings()));
+            writer.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return -1;
+    }
+
+    public static class Settings{
+        public int resolutionX = 800;
+        public int resolutionY = 600;
+        public boolean vsync = false;
+        public boolean showFPS = true;
+        public boolean fullscreen = false;
+        public int moveLeft = 203;
+        public int moveRight = 205;
+        public int jump = 56;
+        public int attack = 29;
     }
 }

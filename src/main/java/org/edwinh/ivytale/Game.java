@@ -11,13 +11,13 @@ public class Game extends BasicGame {
     private AppGameContainer appgc;
 
     public Game() throws SlickException {
-        super(Config.title);
+        super(Config.TITLE);
 
-        appgc = new AppGameContainer(new ScalableGame(this, Config.renderWidth, Config.renderHeight, true));
-        appgc.setDisplayMode(Config.screenWidth, Config.screenHeight, false);
-        appgc.setVSync(Config.vsync);
+        appgc = new AppGameContainer(new ScalableGame(this, Config.RENDER_WIDTH, Config.RENDER_HEIGHT, true));
+        appgc.setDisplayMode(Config.active.resolutionX, Config.active.resolutionY, false);
+        appgc.setVSync(Config.active.vsync);
         appgc.setForceExit(false);
-        appgc.setShowFPS(Config.show_fps);
+        appgc.setShowFPS(false);
         appgc.setUpdateOnlyWhenVisible(false);
         appgc.setMinimumLogicUpdateInterval(8);
         appgc.start();
@@ -31,7 +31,10 @@ public class Game extends BasicGame {
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
         currentScene.render(gc, g);
-        if(Config.show_fps){
+        if(Config.active.showFPS){
+            g.setColor(Color.black);
+            g.drawString(String.format("%s fps", gc.getFPS()), 20, 21);
+            g.setColor(Color.white);
             g.drawString(String.format("%s fps", gc.getFPS()), 20, 20);
         }
     }
@@ -45,8 +48,8 @@ public class Game extends BasicGame {
     public String getTitle() {
         return String.format(
                 "%s (%s)",
-                Config.title,
-                Config.version
+                Config.TITLE,
+                Config.VERSION
         );
     }
 

@@ -10,15 +10,15 @@ import java.util.Arrays;
 public class Launcher {
     public static void main(String[] args) {
         if(Arrays.asList(args).contains("--clean-config")) {
-            System.out.println("Cleaning config...");
-            Config.load(true);
-        }else{
-            Config.load();
+            Config.clean();
         }
+        Config.load();
+
         try {
             new Game();
         } catch (SlickException e) {
             e.printStackTrace();
         }
+
     }
 }

@@ -35,8 +35,8 @@ public class CameraSystem extends EntitySystem{
 
             int sourceX = (int) Math.round(fx);
             int sourceY = (int) Math.round(fy);
-            int targetX = (int) Math.round(-pos.x+Config.renderWidth/2);
-            int targetY = (int) Math.round(-pos.y+Config.renderHeight/2);
+            int targetX = (int) Math.round(-pos.x+Config.RENDER_WIDTH/2);
+            int targetY = (int) Math.round(-pos.y+Config.RENDER_HEIGHT/2);
 
             double distance = Math.round(Math.sqrt(Math.pow((targetX-sourceX),2)+Math.pow(targetY-sourceY, 2)));
 

@@ -6,6 +6,7 @@ import org.edwinh.ivytale.components.*;
 import org.edwinh.ivytale.Entity;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,17 +36,17 @@ public class PlayerControlSystem extends EntitySystem {
             double adjustedMoveSpeed = stats.moveSpeed * 0.065f;
             double adjustedJumpHeight = stats.jumpHeight * 0.15f;
 
-            if(gc.getInput().isKeyDown(Config.control_jump) && phys.velocityY == 0){
+            if(gc.getInput().isKeyDown(Config.active.jump) && phys.velocityY == 0){
                 phys.velocityY -= (adjustedJumpHeight);
             }
 
-            if(gc.getInput().isKeyDown(Config.control_walkRight)) {
+            if(gc.getInput().isKeyDown(Config.active.moveRight)) {
                 lastAction = Action.WALK_RIGHT;
                 phys.velocityX = adjustedMoveSpeed;
                 if(!anim.name.equals("character_walk_right")){
                     anim.change("character_walk_right");
                 }
-            }else if(gc.getInput().isKeyDown(Config.control_walkLeft)) {
+            }else if(gc.getInput().isKeyDown(Config.active.moveLeft)) {
                 lastAction = Action.WALK_LEFT;
                 phys.velocityX = adjustedMoveSpeed * -1;
                 if(!anim.name.equals("character_walk_left")){
