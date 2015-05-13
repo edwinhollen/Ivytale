@@ -1,26 +1,26 @@
 [
   {
     "name": "test",
-    "background": "bluesky.png",
+    "background": "background_bluesky",
     "gravity": 1.0,
     "pieces": [
       {
-        "type": "grass-single",
+        "type": "grass_single",
         "x": 0,
         "y": 50
       },
       {
-        "type": "grass-single",
+        "type": "grass_single",
         "x": 50,
         "y": 70
       },
       {
-        "type": "grass-single",
+        "type": "grass_single",
         "x": 100,
         "y": 90
       },
       {
-        "type": "grass-double",
+        "type": "grass_double",
         "x": 150,
         "y": 90
       }

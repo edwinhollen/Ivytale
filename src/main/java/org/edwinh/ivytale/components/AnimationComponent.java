@@ -11,6 +11,7 @@ public class AnimationComponent extends Component {
     public String name;
     public int currentFrame;
     public long lastFrame;
+    public boolean locked;
     public void change(String name){
         this.name = name;
         this.currentFrame = 0;

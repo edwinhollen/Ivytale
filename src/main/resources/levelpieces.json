@@ -1,6 +1,6 @@
 {
-  "grass-single": {
-    "image": "grass-single.png",
+  "grass_single": {
+    "animation": "grass_single",
     "hitbox": {
       "x": 6,
       "y": 5,
@@ -8,8 +8,8 @@
       "height": 11
     }
   },
-  "grass-double": {
-    "image": "grass-double.png",
+  "grass_double": {
+    "animation": "grass_double",
     "hitbox": {
       "x": 6,
       "y": 5,

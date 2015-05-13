@@ -116,5 +116,14 @@
     "frames": [
       "character-jump-shaded.png"
     ]
+  },
+  "background_bluesky": {
+    "frames": ["bluesky.png"]
+  },
+  "grass_single": {
+    "frames": ["grass-single.png"]
+  },
+  "grass_double": {
+    "frames": ["grass-double.png"]
   }
 }

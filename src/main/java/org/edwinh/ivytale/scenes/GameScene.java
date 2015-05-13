@@ -33,7 +33,6 @@ public class GameScene extends Scene {
         this.systems.add(new CameraSystem());
         this.systems.add(new UserInterfaceSystem());
         this.systems.add(new AnimationSystem());
-        this.systems.add(new ImageSystem());
 
     }
     @Override

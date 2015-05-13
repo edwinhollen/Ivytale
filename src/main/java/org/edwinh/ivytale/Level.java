@@ -1,5 +1,6 @@
 package org.edwinh.ivytale;
 
+import org.edwinh.ivytale.components.AnimationComponent;
 import org.edwinh.ivytale.components.ImageComponent;
 import org.edwinh.ivytale.components.PhysicsComponent;
 import org.edwinh.ivytale.components.PositionComponent;
@@ -29,9 +30,9 @@ public class Level {
                 if(!thisLevel.optString("background", "").isEmpty()){
                     Entity backgroundEntity = new Entity();
                     backgroundEntity.components.add(new PositionComponent(0, 0));
-                    ImageComponent backgroundImageComponent = new ImageComponent(thisLevel.getString("background"));
-                    backgroundImageComponent.locked = true;
-                    backgroundEntity.components.add(backgroundImageComponent);
+                    AnimationComponent backgroundAnimationComponent = new AnimationComponent(thisLevel.getString("background"));
+                    backgroundAnimationComponent.locked = true;
+                    backgroundEntity.components.add(backgroundAnimationComponent);
                     this.entities.add(backgroundEntity);
                 }
 
@@ -47,7 +48,7 @@ public class Level {
 
                     Entity levelPieceEntity = new Entity();
                     levelPieceEntity.components.add(new PositionComponent(levelPieceX, levelPieceY));
-                    levelPieceEntity.components.add(new ImageComponent(allPieces.getJSONObject(levelPieceType).getString("image")));
+                    levelPieceEntity.components.add(new AnimationComponent(allPieces.getJSONObject(levelPieceType).getString("animation")));
                     levelPieceEntity.components.add(new PhysicsComponent(
                         new Rectangle(
                             allPieces.getJSONObject(levelPieceType).getJSONObject("hitbox").getInt("x"),
