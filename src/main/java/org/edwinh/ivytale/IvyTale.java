@@ -7,7 +7,7 @@ import java.util.Arrays;
 /**
  * Created by Fubar on 4/18/2015.
  */
-public class Launcher {
+public class IvyTale {
     public static void main(String[] args) {
         if(Arrays.asList(args).contains("--clean-config")) {
             Config.clean();

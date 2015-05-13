@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.util.ResourceLoader;
 
 import java.time.Instant;
@@ -56,7 +57,15 @@ public class AnimationSystem extends EntitySystem {
                     ic.flipVertical = animationObject.optBoolean("flip_vertical", false);
                     frames.add(ic);
                 }
-                this.animations.put(name, new Animation(frames, animationObject.optInt("delay", 120), animationObject.optBoolean("loop", true)));
+                this.animations.put(
+                    name,
+                    new Animation(
+                        frames,
+                        animationObject.optInt("delay", 120),
+                        animationObject.optBoolean("loop", true),
+                        animationObject.optBoolean("scaled", true)
+                    )
+                );
             }catch(JSONException e){
                 e.printStackTrace();
                 System.out.println("Couldn't add animation");
@@ -83,23 +92,33 @@ public class AnimationSystem extends EntitySystem {
 
     @Override
     public void render(ArrayList<Entity> entities, GameContainer gc, Graphics g) {
-        g.scale(Config.active.resolutionX/Config.RENDER_WIDTH, Config.active.resolutionY/Config.RENDER_HEIGHT);
+        //g.scale(Config.active.resolutionX/Config.RENDER_WIDTH, Config.active.resolutionY/Config.RENDER_HEIGHT);
         for(Entity e : entities){
             PositionComponent pc = ((PositionComponent) e.getComponentByClass(PositionComponent.class));
             AnimationComponent ac = ((AnimationComponent) e.getComponentByClass(AnimationComponent.class));
             Animation a = this.animations.get(ac.name);
-            a.frames.get(ac.currentFrame).getImage().draw((float) ((ac.locked ? 0 : CameraSystem.x) + pc.x), (float) ((ac.locked ? 0 : CameraSystem.y) + pc.y));
+
+            Image img = a.frames.get(ac.currentFrame).getImage();
+
+            if(a.scaled){
+                float scale = Config.active.resolutionY/Config.RENDER_HEIGHT;
+                img.draw((float) ((ac.locked ? 0 : CameraSystem.x) + pc.x)*scale, (float) ((ac.locked ? 0 : CameraSystem.y) + pc.y)*scale, scale);
+            }else{
+                img.draw((float) ((ac.locked ? 0 : CameraSystem.x) + pc.x), (float) ((ac.locked ? 0 : CameraSystem.y) + pc.y));
+            }
         }
     }
 
     public static class Animation extends Component {
-        public int delay = 100;
+        public int delay = 120;
         public boolean looping = true;
+        public boolean scaled = false;
         public List<ImageComponent> frames = new ArrayList<>();
-        public Animation(List<ImageComponent> frames, int delay, boolean looping){
+        public Animation(List<ImageComponent> frames, int delay, boolean looping, boolean scaled){
             this.frames = frames;
             this.delay = delay;
             this.looping = looping;
+            this.scaled = scaled;
         }
     }
 }

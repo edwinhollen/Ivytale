@@ -45,7 +45,6 @@ public class Game extends BasicGame {
     }
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
-
         currentScene.render(gc, g);
         if(Config.active.showFPS){
             font_regular.drawString(20, 21, String.format("%s fps", gc.getFPS()), Color.black);

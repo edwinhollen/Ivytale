@@ -10,7 +10,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<main.class>org.edwinh.ivytale.Launcher</main.class>
+		<main.class>org.edwinh.ivytale.IvyTale</main.class>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
