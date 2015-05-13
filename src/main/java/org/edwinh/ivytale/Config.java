@@ -59,7 +59,7 @@ public class Config {
         public int resolutionX = 800;
         public int resolutionY = 600;
         public boolean vsync = false;
-        public boolean showFPS = true;
+        public boolean debug = true;
         public boolean fullscreen = false;
         public int moveLeft = 203;
         public int moveRight = 205;
