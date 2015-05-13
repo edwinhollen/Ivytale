@@ -30,6 +30,7 @@ public class Game extends BasicGame {
     }
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
+
         currentScene.render(gc, g);
         if(Config.active.showFPS){
             g.setColor(Color.black);
@@ -56,7 +57,6 @@ public class Game extends BasicGame {
 
     @Override
     public void update(GameContainer gc, int dt) throws SlickException {
-        //System.out.println((double) dt);
         currentScene.update(gc, (double) dt);
     }
 
