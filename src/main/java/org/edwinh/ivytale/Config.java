@@ -46,6 +46,7 @@ public class Config {
     }
     public static void makeNewConfigFile(){
         System.out.println("Making a fresh new config file...");
+        getConfigFile().getParentFile().mkdirs();
         try {
             FileWriter writer = new FileWriter(getConfigFile());
             writer.write((new Gson()).toJson(new Settings()));
